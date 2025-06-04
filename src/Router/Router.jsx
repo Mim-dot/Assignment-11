@@ -5,6 +5,8 @@ import Login from "../component/Login";
 import Register from "../component/Register";
 import Mainlayout from "../Layout/Mainlayout";
 import Error from "../component/Error";
+import Profile from "../component/Profile";
+
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +50,14 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-     
+      {
+        path: "/profile", 
+        element: <Profile />,
+      },
+       {
+        path: "/profile", 
+        element: <Profile />,
+      },
       {
         path: "/auth/login",
         element: <Login />,
