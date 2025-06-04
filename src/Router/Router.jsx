@@ -6,6 +6,7 @@ import Register from "../component/Register";
 import Mainlayout from "../Layout/Mainlayout";
 import Error from "../component/Error";
 import Profile from "../component/Profile";
+import PostArticle from "../component/PostArticle";
 
 
 export const router = createBrowserRouter([
@@ -55,8 +56,8 @@ export const router = createBrowserRouter([
         element: <Profile />,
       },
        {
-        path: "/profile", 
-        element: <Profile />,
+        path: "/post", 
+        element: <PostArticle />,
       },
       {
         path: "/auth/login",

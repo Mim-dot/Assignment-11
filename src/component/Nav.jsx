@@ -109,7 +109,7 @@ const Nav = () => {
                   My Articles
                 </NavLink>
               </li>
-              <li><NavLink to="/post-article">Post Article</NavLink></li>
+              <li><NavLink to="/post">Post Article</NavLink></li>
               <li><NavLink to="/profile">Profile</NavLink></li>
               <li><button onClick={handleLogOut}>Log out</button></li>
             </ul>
