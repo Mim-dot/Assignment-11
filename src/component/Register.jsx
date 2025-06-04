@@ -1,153 +1,162 @@
-import React, { use, useState } from "react";
-import { Link, useNavigate } from "react-router";
-import { AuthContext } from "../Provider/AuthProvider";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { motion } from "framer-motion";
+import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
+
 const Register = () => {
-   document.title = "Register";
-  const { createUser, setUser, updateUser, handleGoogle } = use(AuthContext);
+  const { createUser, setUser, updateUser, handleGoogle } = useContext(AuthContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = "Register";
+  }, []);
+
   const handleRegister = (e) => {
     e.preventDefault();
-    //console.log(e.target);
     const form = e.target;
     const name = form.name.value;
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
+
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (!passwordRegex.test(password)) {
-      setError(
-        "Password must contain at least one uppercase, one lowercase letter, and be at least 6 characters long."
-      );
+      setError("Password must have at least one uppercase, one lowercase letter, and be 6+ characters.");
       return;
     }
-    //console.log(name,photo,email,password);
+
     createUser(email, password)
       .then((result) => {
-        document.title = "Register";
         const user = result.user;
-        const { uid, email } = user;
-        const newUser = { uid, email };
+        const newUser = { uid: user.uid, email: user.email };
+
         fetch("https://assi-10-psi.vercel.app/users", {
           method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
+          headers: { "content-type": "application/json" },
           body: JSON.stringify(newUser),
-        })
-          .then((res) => res.json())
-          .then((data) => console.log(data));
+        });
 
-        updateUser({ displayName: name, photoURL: photo })
-          .then(() => {
-            setUser({ ...user, displayName: name, photoURL: photo });
-            toast.success("Registered successfully!");
-            navigate("/");
-          })
-          .catch((error) => {
-            console.log(error);
-            setUser(user);
-          });
+        updateUser({ displayName: name, photoURL: photo }).then(() => {
+          setUser({ ...user, displayName: name, photoURL: photo });
+          toast.success("Registered successfully!");
+          navigate("/");
+        });
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
-      });
+      .catch((err) => toast.error(err.message));
   };
 
   const handleGoogleLogin = () => {
     handleGoogle()
       .then((result) => {
-        const user = result.user;
+        setUser(result.user);
         toast.success("Google login successful!");
-        setUser(user);
         navigate("/");
       })
-      .catch((error) => {
-        toast.error("Google login failed: " + error.message);
-      });
+      .catch((error) => toast.error("Google login failed: " + error.message));
   };
+
   return (
-    <div className="hero bg-white min-h-screen ">
-      <div className="hero-content flex-col lg:flex-row-reverse ">
-        <div className="card bg-gradient-to-b from-orange-300 to-white w-80  max-w-sm shrink-0 shadow-2xl">
-          <div className="card-body">
-            <h1 className="">Register Here</h1>
-            {error && <p className="text-red-700 text-sm">{error}</p>}
-            <form onSubmit={handleRegister} action="">
-              <fieldset className="fieldset">
-                {/* name */}
-                <label className="label">Name</label>
-                <input
-                  name="name"
-                  type="text"
-                  className="input"
-                  placeholder="Name"
-                  required
-                />
-                {/* photoURL  */}
-                <label className="label">photoURL </label>
-                <input
-                  name="photo"
-                  type="url"
-                  className="input"
-                  placeholder="photoURL"
-                  required
-                />
-                {/* email */}
-                <label className="label">Email</label>
-                <input
-                  name="email"
-                  type="email"
-                  className="input"
-                  placeholder="Email"
-                  required
-                />
-                {/* pass */}
-                <label className="label">Password</label>
-                <input
-                  name="password"
-                  type="password"
-                  className="input"
-                  placeholder="Password"
-                  required
-                />
-
-                <button type="submit" className="btn btn-neutral mt-4">
-                  Register
-                </button>
-                <div className="flex items-center gap-2 justify-center bg-white rounded-lg h-8">
-                  <FcGoogle size={20} />
-                  {/* Google */}
-                  <button
-                    type="button"
-                    onClick={handleGoogleLogin}
-                    className="cursor-pointer font-semibold pt-1 text-[15px]"
-                  >
-                    Login with Google
-                  </button>
-                </div>
-
-                <p className="link link-hover text-center font-semibold text-[14px]">
-                  Already have an account?{" "}
-                  <Link
-                    className="text-[#F97316] hover:text-emerald-900"
-                    to="/auth/login"
-                  >
-                    __Login
-                  </Link>
-                </p>
-              </fieldset>
-            </form>
-          </div>
-        </div>
+    <motion.div
+      className="relative min-h-screen overflow-hidden bg-white dark:bg-black"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      {/* Background effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600 opacity-30 rounded-full blur-3xl animate-spin-slow" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-yellow-400 via-orange-500 to-red-500 opacity-20 rounded-full blur-2xl animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-transparent to-white/70 dark:from-black/70 dark:to-black/70" />
       </div>
-    </div>
+
+      {/* Main Form Section */}
+      <div className="relative z-10 grid md:grid-cols-2 items-center min-h-screen px-8 py-12">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-center md:text-left text-black dark:text-white"
+        >
+          <h1 className="text-4xl font-bold mb-3">Join TaskLink</h1>
+          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-sm mx-auto md:mx-0">
+            Create your account to connect with freelancers or get hired for small tasks.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="w-full max-w-md mx-auto backdrop-blur-md bg-white/10 dark:bg-black/10 border border-white/30 rounded-xl p-8 text-black dark:text-white"
+        >
+          <form onSubmit={handleRegister} className="space-y-5">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-2xl font-semibold text-center"
+            >
+              Register
+            </motion.h2>
+
+            {error && <p className="text-sm text-red-500">{error}</p>}
+
+            {["name", "photo", "email", "password"].map((field, index) => (
+              <motion.div
+                key={field}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
+              >
+                <label className="block text-sm font-medium capitalize">{field === "photo" ? "Photo URL" : field}</label>
+                <input
+                  name={field}
+                  type={field === "password" ? "password" : field === "email" ? "email" : "text"}
+                  className="input-style"
+                  placeholder={field === "photo" ? "Photo URL" : field.charAt(0).toUpperCase() + field.slice(1)}
+                  required
+                />
+              </motion.div>
+            ))}
+
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
+            >
+              Register
+            </motion.button>
+
+            <motion.div
+              className="flex text-black items-center justify-center gap-2"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FcGoogle size={20} />
+              <button type="button" onClick={handleGoogleLogin} className="text-sm dark:text-white">
+                Register with Google
+              </button>
+            </motion.div>
+
+            <motion.p
+              className="text-center text-sm mt-3 text-gray-700 dark:text-gray-300"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9 }}
+            >
+              Already have an account?{" "}
+              <Link to="/auth/login" className="text-orange-400 hover:underline">
+                Login
+              </Link>
+            </motion.p>
+          </form>
+        </motion.div>
+      </div>
+    </motion.div>
   );
 };
 

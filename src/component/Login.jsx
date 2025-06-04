@@ -1,114 +1,148 @@
-import React, { use, useState } from "react";
-
+import React, { useEffect, useState, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
+import { motion } from "framer-motion";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  
-  document.title = "LogIn";
   const [error, setError] = useState("");
-  const { signIn, handleForgetPassword,handleGoogle } = use(AuthContext);
+  const [useremail, setUserEmail] = useState("");
+  const { signIn, handleForgetPassword, handleGoogle } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [useremail, setuseremail] = useState("");
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
+
   const handleLogin = (e) => {
     e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    // console.log({ email, password });
-    signIn(email, password)
-      .then((result) => {
-        const user = result.user;
-        navigate(`${location.state ? location.state : "/"}`);
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-        toast.success("Login successful!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+    signIn(email, password)
+      .then(() => {
+        navigate(location.state ? location.state : "/");
+        toast.success("Login successful!");
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        // const errorMessage = error.message;
-        setError(errorCode);
-      });
+      .catch((error) => setError(error.code));
   };
+
   const handleForgotPasswordClick = () => {
     if (useremail) {
       handleForgetPassword(useremail)
-        .then(() => {
-          toast.success("Password reset email sent!");
-        })
-        .catch((error) => {
-          setError("Error sending email: " + error.message);
-        })} }
-  return (
-    <div className="hero bg-white  ">
-      <div className="hero-content flex-col lg:flex-row-reverse ">
-        <div className="card  bg-gradient-to-b from-white to-orange-300 text-gray-800 w-80  max-w-sm shrink-0 shadow-2xl">
-          <form onSubmit={handleLogin} className="card-body">
-            <fieldset className="fieldset">
-              {/* Email */}
-              <label className="label">Email</label>
-              <input
-                name="email"
-                type="email"
-                className="input"
-                onChange={(e) => setuseremail(e.target.value)}
-                placeholder="Email"
-                required
-              />
-              {/* password */}
-              <label className="label">Password</label>
-              <input
-                name="password"
-                type="password"
-                className="input"
-                placeholder="Password"
-                required
-              />
-              {/* fp */}
-              <div>
-                <button
-                  onClick={handleForgotPasswordClick}  className="link link-hover"
-                >
-                  Forgot password?
-                </button>
-                {error && <p className="text-red-900">{error}</p>}
-              </div>
-              {/* btn */}
-              <button type="submit" className="btn bg-[#F97316] text-black border-[#e17d00]  mt-4">
-                Login
-              </button>
-              <div className="flex items-center gap-2 justify-center bg-white rounded-lg h-8">
-                <FcGoogle size={20} />
-                {/* Google */}
-                 <button onClick={handleGoogle} className="cursor-pointer font-semibold pt-1 text-[15px]">
-                                 {" "}
-                                 Login with Google{" "}
-                               </button>
-              </div>
+        .then(() => toast.success("Password reset email sent!"))
+        .catch((error) => setError("Error: " + error.message));
+    }
+  };
 
-              <p className="link link-hover mt-1 text-center font-semibold text-[14px]">
-               Need an account? <span className="text-[#af5819]">Join us Now</span>{" "}
-                <Link
-                  className=" hover:text-emerald-900"
-                  to="/auth/register"
-                >
-                  __Register
-                </Link>
-              </p>
-            </fieldset>
-          </form>
-        </div>
+  return (
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-bl from-[#baebbe] to-white text-black ">
+     
+      <div className="absolute inset-0 z-0 bg-animated-grid">
+        <div className="absolute top-[-20%] left-[-15%] w-[600px] h-[600px] bg-gradient-to-br from-purple-600 via-blue-500 to-pink-500 opacity-20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-[-25%] right-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-yellow-400 via-orange-500 to-red-500 opacity-10 rounded-full blur-2xl animate-ping"></div>
+        <div className="absolute inset-0  backdrop-blur-sm"></div>
       </div>
+
+    
+      <div className="relative z-10 grid md:grid-cols-2 items-center min-h-screen px-8 py-12">
+       
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+          whileHover={{ scale: 1.02 }}
+          className="text-white text-center md:text-left"
+        >
+          <img src="/your-logo.svg" alt="Logo" className="w-28 mx-auto md:mx-0 mb-6" />
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="text-4xl text-amber-50 font-bold mb-4"
+          >
+            Welcome to TaskLink
+          </motion.h1>
+          <p className="text-lg text-black max-w-sm mx-auto md:mx-0">
+            Connect with freelancers. Get your tasks done quickly & easily. Log in to get started.
+          </p>
+        </motion.div>
+
+        
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="w-full max-w-md mx-auto backdrop-blur-md bg-[#0f0c29] rounded-xl p-8 text-white"
+        >
+          <form onSubmit={handleLogin} className="space-y-5">
+            <h2 className="text-2xl font-semibold text-center">Login</h2>
+
+            <div>
+              <label className="block text-sm font-medium">Email</label>
+              <input
+                type="email"
+                name="email"
+                onChange={(e) => setUserEmail(e.target.value)}
+                className="w-full px-4 py-2 mt-1 bg-white/20 border border-white/30 rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium">Password</label>
+              <input
+                type="password"
+                name="password"
+                className="w-full px-4 py-2 mt-1 bg-white/20 border border-white/30 rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+
+            <div className="text-sm text-right">
+              <button
+                type="button"
+                onClick={handleForgotPasswordClick}
+                className="text-orange-300 hover:underline"
+              >
+                Forgot password?
+              </button>
+              {error && <p className="text-red-400 mt-1">{error}</p>}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md"
+            >
+              Login
+            </button>
+
+            <div className="flex items-center justify-center gap-2">
+              <FcGoogle size={20} />
+              <button
+                type="button"
+                onClick={handleGoogle}
+                className="text-sm font-medium text-white"
+              >
+                Login with Google
+              </button>
+            </div>
+
+            <p className="text-center text-sm mt-3 text-gray-300">
+              New here?{" "}
+              <Link to="/auth/register" className="text-orange-300 hover:underline">
+                Register Now
+              </Link>
+            </p>
+          </form>
+        </motion.div>
+      </div>
+
+     
     </div>
   );
 };

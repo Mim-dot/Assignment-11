@@ -30,7 +30,7 @@ const PostArticle = () => {
       });
   };
   return (
-    <div className="p-4 sm:p-6 md:p-8 bg-gradient-to-br from-orange-100 via-white to-orange-50 min-h-screen">
+    <div className="p-4 sm:p-6 md:p-8 min-h-screen">
       <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-xl p-8 border border-orange-200">
         <h2 className="text-3xl font-bold mb-8 text-center text-orange-600">
           Post Article

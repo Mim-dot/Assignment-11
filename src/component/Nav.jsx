@@ -50,9 +50,9 @@ const Nav = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 bg-white text-[#1F2937] border-[#E5E7EB] border-b hover:bg-[#f4f4f7] backdrop-blur-md  shadow-sm">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost italic text-2xl text-[#77c97d] font-bold ">Lilo</a>
       </div>
 
       {/* Mobile Menu */}

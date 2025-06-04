@@ -36,13 +36,13 @@ const Profile = () => {
       });
     } catch (err) {
       console.error(err);
-     Swal.fire({
-  icon: "error",
-  title: "Oops...",
-  text: "Something went wrong!",
- 
-});
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
+    
   };
 
   return (
@@ -63,7 +63,10 @@ const Profile = () => {
                 Gmail: <span className="text-gray-600">{user.email}</span>
               </div>
               <div className="font-bold text-[18px] mt-2 text-gray-700">
-                Name: <span className="text-gray-600">{user.displayName || "User"}</span>
+                Name:{" "}
+                <span className="text-gray-600">
+                  {user.displayName || "User"}
+                </span>
               </div>
             </div>
           </div>
@@ -71,19 +74,25 @@ const Profile = () => {
           {/* Tabs Navigation */}
           <div className="flex justify-center mt-6 space-x-4">
             <button
-              className={`px-4 py-2 rounded ${tab === "articles" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+              className={`px-4 py-2 rounded ${
+                tab === "articles" ? "bg-blue-500 text-white" : "bg-gray-200"
+              }`}
               onClick={() => setTab("articles")}
             >
               Articles
             </button>
             <button
-              className={`px-4 py-2 rounded ${tab === "comments" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+              className={`px-4 py-2 rounded ${
+                tab === "comments" ? "bg-blue-500 text-white" : "bg-gray-200"
+              }`}
               onClick={() => setTab("comments")}
             >
               Comments
             </button>
             <button
-              className={`px-4 py-2 rounded ${tab === "edit" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+              className={`px-4 py-2 rounded ${
+                tab === "edit" ? "bg-blue-500 text-white" : "bg-gray-200"
+              }`}
               onClick={() => setTab("edit")}
             >
               Edit Profile
@@ -96,10 +105,14 @@ const Profile = () => {
             {tab === "articles" && (
               <div className="space-y-4">
                 {dummyArticles.map((article) => (
-                  <div key={article.id} className="p-4 border rounded-md bg-gray-50">
+                  <div
+                    key={article.id}
+                    className="p-4 border rounded-md bg-gray-50"
+                  >
                     <h3 className="text-lg font-semibold">{article.title}</h3>
                     <p className="text-sm text-gray-500">
-                      Posted on {new Date(article.createdAt).toLocaleDateString()}
+                      Posted on{" "}
+                      {new Date(article.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                 ))}
@@ -110,9 +123,14 @@ const Profile = () => {
             {tab === "comments" && (
               <div className="space-y-4">
                 {dummyComments.map((comment) => (
-                  <div key={comment.id} className="p-4 border rounded-md bg-gray-50">
+                  <div
+                    key={comment.id}
+                    className="p-4 border rounded-md bg-gray-50"
+                  >
                     <p>{comment.content}</p>
-                    <p className="text-xs text-gray-500">On article #{comment.articleId}</p>
+                    <p className="text-xs text-gray-500">
+                      On article #{comment.articleId}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -132,7 +150,9 @@ const Profile = () => {
                   />
                 </div>
                 <div className="flex gap-4 items-center">
-                  <label className="w-1/3 text-lg font-semibold">Photo URL:</label>
+                  <label className="w-1/3 text-lg font-semibold">
+                    Photo URL:
+                  </label>
                   <input
                     type="url"
                     className="w-2/3 p-2 border rounded"
@@ -153,7 +173,9 @@ const Profile = () => {
           <ToastContainer />
         </div>
       ) : (
-        <p className="text-center text-xl text-gray-700">Loading user info...</p>
+        <p className="text-center text-xl text-gray-700">
+          Loading user info...
+        </p>
       )}
     </div>
   );
