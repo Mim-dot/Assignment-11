@@ -7,7 +7,11 @@ import Mainlayout from "../Layout/Mainlayout";
 import Error from "../component/Error";
 import Profile from "../component/Profile";
 import PostArticle from "../component/PostArticle";
-
+import MyArticals from "../component/MyArticles";
+import AllArticles from "../component/AllArticles";
+import Abouts from "../component/Abouts";
+import SingleArtical from "../component/SingleArtical";
+import Privet from "../Provider/Privet";
 
 export const router = createBrowserRouter([
   {
@@ -57,7 +61,34 @@ export const router = createBrowserRouter([
       },
        {
         path: "/post", 
-        element: <PostArticle />,
+         element:(
+  <Privet><PostArticle /></Privet>
+          
+        ) ,
+      },
+      {
+        path: "/myarticals", 
+        element:(
+  <Privet><MyArticals/></Privet>
+          
+        ) ,
+      },
+      {
+        path: "/all", 
+        element: <AllArticles />,
+        loader: () => fetch("http://localhost:9000/articles"),
+      },
+      {
+        path: "/singleArtical/:id", 
+        element: <SingleArtical/>,
+       loader: ({ params }) =>
+  fetch(`http://localhost:9000/articles/${params.id}`)
+
+      },
+     
+      {
+        path: "/about", 
+        element: <Abouts />,
       },
       {
         path: "/auth/login",
