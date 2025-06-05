@@ -12,6 +12,7 @@ import AllArticles from "../component/AllArticles";
 import Abouts from "../component/Abouts";
 import SingleArtical from "../component/SingleArtical";
 import Privet from "../Provider/Privet";
+import Update from "../component/Update";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,8 @@ export const router = createBrowserRouter([
         path: "/profile", 
         element: <Profile />,
       },
+      
+
        {
         path: "/post", 
          element:(
@@ -67,11 +70,13 @@ export const router = createBrowserRouter([
         ) ,
       },
       {
-        path: "/myarticals", 
+        path: "/myarticals/:id", 
         element:(
   <Privet><MyArticals/></Privet>
           
         ) ,
+        loader: ({ params }) =>
+          fetch(`http://localhost:9000/myarticals/${params.id}`),
       },
       {
         path: "/all", 
@@ -85,7 +90,11 @@ export const router = createBrowserRouter([
   fetch(`http://localhost:9000/articles/${params.id}`)
 
       },
-     
+      {
+        path: "/update/:id", 
+        element: <Update />,
+          loader: ({ params }) => fetch(`http://localhost:9000/articles/${params.id}`),
+      },
       {
         path: "/about", 
         element: <Abouts />,

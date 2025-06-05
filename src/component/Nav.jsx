@@ -104,11 +104,10 @@ const Nav = () => {
               tabIndex={0}
               className="menu  menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <NavLink to="/myarticals" >
-                  My Articles
-                </NavLink>
-              </li>
+              <NavLink to={`/myarticals/${user?.uid}`}>
+  My Articles
+</NavLink>
+
               <li><NavLink to="/post">Post Article</NavLink></li>
               <li><NavLink to="/profile">Profile</NavLink></li>
               <li><button onClick={handleLogOut}>Log out</button></li>

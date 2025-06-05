@@ -121,15 +121,18 @@ export default function SingleArtical() {
                   </div>
                 <div>
                   <p className="text-gray-800 mb-3">{c.comment}</p>
-                      {typeof article.tags === "string" &&
+                  {/* tag */}
+       {article.tags && article.tags.trim() !== "" &&
   article.tags.split(",").map((tag) => (
     <span
       key={tag.trim()}
-      className="bg-pink-100 text-pink-600 px-3 py-1  rounded-full"
+      className="bg-pink-100 text-pink-600 px-3 py-1 rounded-full"
     >
       #{tag.trim()}
     </span>
-  ))}
+  ))
+}
+
                   </div>  
 
                 </div>
