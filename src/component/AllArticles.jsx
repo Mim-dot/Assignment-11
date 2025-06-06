@@ -2,13 +2,13 @@ import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
-
+import "../index.css"
 const AllArticles = () => {
   const data = useLoaderData();
 
   return (
     <div
-      className="max-w-7xl mx-auto px-4 py-8 "
+      className="all-artical max-w-7xl mx-auto px-4 py-8 "
       style={{
         backgroundImage:
           "url('https://i.ibb.co/7tT3GZzC/photo-1503676260728-1c00da094a0bg.jpg')",
@@ -57,7 +57,7 @@ const AllArticles = () => {
                       "0 8px 20px rgba(59, 130, 246, 0.4), 0 0 30px 5px rgba(96, 165, 250, 0.5)",
                   }}
                 >
-                  <h2 className="text-2xl font-bold text-primary mb-2">
+                  <h2 className="h2-title text-2xl font-bold text-primary mb-2">
                     {article.title}
                   </h2>
 

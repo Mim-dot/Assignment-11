@@ -2,8 +2,27 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { toast } from 'react-toastify';
-
+import { useState } from 'react';
+import { useEffect } from 'react';
+import "../index.css"
 const Nav = () => {
+
+  const [isDark, setIsDark] = useState(
+    () => localStorage.getItem("theme") === "dark"
+  );
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
+
   const { user, logOut } = useContext(AuthContext);
 
   const handleLogOut = () => {
@@ -46,11 +65,18 @@ const Nav = () => {
           About Us
         </NavLink>
       </li>
+         <button
+              onClick={() => setIsDark(!isDark)}
+              className="btn btn-sm"
+              aria-label="Toggle theme"
+            >
+              {isDark ? "☀" : "🌙"}
+            </button>
     </>
   );
 
   return (
-    <div className="navbar bg-base-100 bg-white text-[#1F2937] border-[#E5E7EB] border-b hover:bg-[#f4f4f7] backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50">
+    <div className="navbar nav-nav bg-base-100 bg-white text-[#1F2937] border-[#E5E7EB] border-b hover:bg-[#f4f4f7] backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50">
       <div className="flex-1">
         <a className="btn btn-ghost italic text-2xl text-[#77c97d] font-bold">Lilo</a>
       </div>
@@ -75,7 +101,7 @@ const Nav = () => {
           {navLinks}
           {user && (
             <>
-              <li><NavLink to={`/myarticles/${user?.uid}`}>My Articles</NavLink></li>
+                   <li><NavLink to={`/myarticles/${user?.uid}`}>My Articles</NavLink></li>
               <li><NavLink to="/post">Post Article</NavLink></li>
               <li><NavLink to="/profile">Profile</NavLink></li>
               <li><button onClick={handleLogOut}>Log out</button></li>
@@ -112,9 +138,8 @@ const Nav = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li> <NavLink to={`/myarticals/${user?.uid}`}>
-  My Articles
-</NavLink> </li>
+                <li><NavLink to={`/myarticles/${user?.uid}`}>My Articles</NavLink></li>
+                {/* to={`/myarticles/${user?.uid}`} */}
               <li><NavLink to="/post">Post Article</NavLink></li>
               <li><NavLink to="/profile">Profile</NavLink></li>
               <li><button onClick={handleLogOut}>Log out</button></li>

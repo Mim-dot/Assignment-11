@@ -70,7 +70,7 @@ export const router = createBrowserRouter([
         ) ,
       },
       {
-        path: "/myarticals/:id", 
+        path: "/myarticles/:id",
         element:(
   <Privet><MyArticals/></Privet>
           
@@ -78,6 +78,7 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:9000/myarticals/${params.id}`),
       },
+ 
       {
         path: "/all", 
         element: <AllArticles />,
