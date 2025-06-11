@@ -46,9 +46,9 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex justify-center items-center p-4 bg-gradient-to-b from-pink-100 to-blue-100 min-h-screen">
+    <div className="profile flex justify-center items-center p-4  min-h-screen mt-5">
       {user ? (
-        <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6">
+        <div className="profile-2 w-full max-w-4xl bg-white shadow-lg rounded-lg p-6">
           {/* Profile Header */}
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
             <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring-2 ring-offset-2 overflow-hidden">
@@ -58,13 +58,13 @@ const Profile = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="text-center lg:text-left">
-              <div className="font-bold text-[18px] text-gray-700">
-                Gmail: <span className="text-gray-600">{user.email}</span>
+            <div className=" text-center lg:text-left">
+              <div className="profile-gn font-bold text-[18px] text-gray-700">
+                Gmail : <span className="text-gray-600 profile-gn">{user.email}</span>
               </div>
-              <div className="font-bold text-[18px] mt-2 text-gray-700">
-                Name:{" "}
-                <span className="text-gray-600">
+              <div className="profile-gn font-bold text-[18px] mt-2 text-gray-700 profile-gn">
+                Name :{" "}
+                <span className="text-gray-600 profile-gn">
                   {user.displayName || "User"}
                 </span>
               </div>
@@ -99,9 +99,9 @@ const Profile = () => {
             </button>
           </div>
 
-          {/* Tab Content */}
+         
           <div className="mt-6">
-            {/* Articles Tab */}
+        
             {tab === "articles" && (
               <div className="space-y-4">
                 {dummyArticles.map((article) => (
@@ -119,7 +119,7 @@ const Profile = () => {
               </div>
             )}
 
-            {/* Comments Tab */}
+            {/* Comments  */}
             {tab === "comments" && (
               <div className="space-y-4">
                 {dummyComments.map((comment) => (
@@ -136,26 +136,26 @@ const Profile = () => {
               </div>
             )}
 
-            {/* Edit Profile Tab */}
+            {/* Edit Profile  */}
             {tab === "edit" && (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex gap-4 items-center">
-                  <label className="w-1/3 text-lg font-semibold">Name:</label>
+                  <label className="w-1/3 text-lg font-semibold profile-photo">Name:</label>
                   <input
                     type="text"
-                    className="w-2/3 p-2 border rounded"
+                    className="w-2/3 p-2 border rounded profile-photo"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
                   />
                 </div>
                 <div className="flex gap-4 items-center">
-                  <label className="w-1/3 text-lg font-semibold">
+                  <label className="w-1/3 text-lg font-semibold profile-photo">
                     Photo URL:
                   </label>
                   <input
                     type="url"
-                    className="w-2/3 p-2 border rounded"
+                    className="w-2/3 p-2 border rounded profile-photo"
                     value={photo}
                     onChange={(e) => setPhoto(e.target.value)}
                     required
@@ -182,3 +182,8 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+
+
+

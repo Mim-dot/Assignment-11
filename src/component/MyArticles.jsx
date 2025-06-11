@@ -147,8 +147,8 @@ const MyArticles = () => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#6c63ff",   // softer purple
-      cancelButtonColor: "#e07a5f",    // muted coral
+      confirmButtonColor: "#6c63ff",  
+      cancelButtonColor: "#e07a5f",    
       confirmButtonText: "Yes, Delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
@@ -171,7 +171,7 @@ const MyArticles = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 mt-2">
       {users.length === 0 ? (
         <div className="text-center text-2xl sm:text-3xl font-semibold text-purple-600 mb-10">
           <span>{text}</span>
@@ -185,7 +185,7 @@ const MyArticles = () => {
         </div>
       ) : (
         <>
-          <h1 className="text-2xl sm:text-3xl font-semibold text-center text-purple-700 mb-8">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-center text-purple-700 mb-10 mt-12">
             📋 My Posted Tasks
           </h1>
           <div className="overflow-x-auto">

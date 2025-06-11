@@ -3,29 +3,29 @@ import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../Provider/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { useLoaderData } from "react-router";
-import '../index.css'
+import { motion } from "framer-motion";
+import formlotti from "../assets/Lotties/Form.json";
+import Lottie from "lottie-react";
+
 const Update = () => {
-  document.title = "Update Artical";
+  document.title = "Update Article";
 
   const data = useLoaderData();
-  console.log(data);
   const { user } = useContext(AuthContext);
 
-  const notify = () => toast.success("Article Update successfully!");
+  const notify = () => toast.success("Article updated successfully!");
 
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const updateArtical = Object.fromEntries(formData.entries());
-    updateArtical.uid = user.uid;
-    console.log(updateArtical);
+    const updateArticle = Object.fromEntries(formData.entries());
+    updateArticle.uid = user.uid;
+
     fetch(`http://localhost:9000/articles/${data?._id}`, {
       method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateArtical),
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(updateArticle),
     })
       .then((res) => res.json())
       .then(() => {
@@ -34,150 +34,196 @@ const Update = () => {
       });
   };
 
- // Just update classes below, rest of your code stays the same
+  // Motion variants
+  const formVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
 
-return (
-  <div className="update-page">
-    <div className="update-container">
-      <h2 className="update-title">Update Article</h2>
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      transition: { duration: 0.2 },
+    },
+    tap: {
+      scale: 0.98,
+    }
+  };
 
-      <form onSubmit={handleUpdate}>
-        <div className="table-wrapper">
-          <table className="update-table">
-            <tbody>
-              <tr>
-                <th>Title</th>
-                <td>
-                  <input
-                    name="title"
-                    type="text"
-                    required
-                    placeholder="Article Title"
-                    className="input-field"
-                    defaultValue={data?.title || ""}
-                  />
-                </td>
-              </tr>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 py-8 px-4 sm:px-6">
+      <motion.div
+        className="max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
+        variants={formVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <div className="flex flex-col md:flex-row">
+          {/* Lottie Animation Section (Left) */}
+          <div className="w-full md:w-1/2 bg-gradient-to-br from-purple-100 to-indigo-100  flex items-center justify-center p-8">
+            <div className="max-w-md w-full">
+              <Lottie animationData={formlotti} loop={true} />
+              <div className="text-center mt-6">
+                <h3 className="text-xl font-semibold text-purple-800 ">Edit with Confidence</h3>
+                <p className="text-purple-600  mt-2">
+                  Update your article details and make it even better!
+                </p>
+              </div>
+            </div>
+          </div>
 
-              <tr>
-                <th>Category</th>
-                <td>
-                  <input
-                    name="category"
-                    type="text"
-                    list="categoryList"
-                    placeholder="Select a Category"
-                    required
-                    className="input-field"
-                    defaultValue={data?.category || ""}
-                  />
-                  <datalist id="categoryList">
-                    <option value="Technology" />
-                    <option value="Science" />
-                    <option value="Arts" />
-                  </datalist>
-                </td>
-              </tr>
+          {/* Form Section (Right) */}
+          <div className="w-full md:w-1/2 p-6 sm:p-8">
+            <h2 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600   mb-6 mt-8">
+              Update Your Article
+            </h2>
 
-              <tr>
-                <th>Content</th>
-                <td>
-                  <textarea
-                    name="content"
-                    rows="4"
-                    placeholder="Write your article content"
-                    required
-                    className="input-field textarea-field"
-                    defaultValue={data?.content || ""}
-                  />
-                </td>
-              </tr>
+            <form onSubmit={handleUpdate} className="space-y-6">
+              {/* Title */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700  mb-2">
+                  Title
+                </label>
+                <input
+                  name="title"
+                  type="text"
+                  required
+                  placeholder="Article Title"
+                  defaultValue={data?.title || ""}
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                />
+              </div>
 
-              <tr>
-                <th>Tags</th>
-                <td>
-                  <input
-                    name="tags"
-                    type="text"
-                    placeholder="e.g. AI, JavaScript, Web Dev"
-                    className="input-field"
-                    defaultValue={data?.tags || ""}
-                  />
-                </td>
-              </tr>
+              {/* Category */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Category
+                </label>
+                <input
+                  name="category"
+                  type="text"
+                  list="categoryList"
+                  placeholder="Select a Category"
+                  required
+                  defaultValue={data?.category || ""}
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300  focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                />
+                <datalist id="categoryList">
+                  <option value="Technology" />
+                  <option value="Science" />
+                  <option value="Arts" />
+                </datalist>
+              </div>
 
-              <tr>
-                <th>Deadline</th>
-                <td>
-                  <input
-                    name="deadline"
-                    type="date"
-                    required
-                    className="input-field"
-                    defaultValue={
-                      data?.deadline
-                        ? new Date(data.deadline).toISOString().split("T")[0]
-                        : ""
-                    }
-                  />
-                </td>
-              </tr>
+              {/* Content */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Content
+                </label>
+                <textarea
+                  name="content"
+                  rows="6"
+                  placeholder="Write your article content"
+                  required
+                  defaultValue={data?.content || ""}
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300  focus:ring-2 focus:ring-purple-500 focus:border-transparent  transition-all duration-200"
+                />
+              </div>
 
-              <tr>
-                <th>Photo URL</th>
-                <td>
-                  <input
-                    name="photo"
-                    type="url"
-                    required
-                    placeholder="https://example.com/image.jpg"
-                    className="input-field"
-                    defaultValue={data?.photo || ""}
-                  />
-                </td>
-              </tr>
+              {/* Tags */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Tags (comma separated)
+                </label>
+                <input
+                  name="tags"
+                  type="text"
+                  placeholder="e.g. AI, JavaScript, Web Dev"
+                  defaultValue={data?.tags || ""}
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300  focus:ring-2 focus:ring-purple-500 focus:border-transparent  transition-all duration-200"
+                />
+              </div>
 
-              <tr>
-                <th>User Name</th>
-                <td>
+              {/* Deadline */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700  mb-2">
+                  Deadline
+                </label>
+                <input
+                  name="deadline"
+                  type="date"
+                  required
+                  defaultValue={
+                    data?.deadline
+                      ? new Date(data.deadline).toISOString().split("T")[0]
+                      : ""
+                  }
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300  focus:ring-2 focus:ring-purple-500 focus:border-transparent  transition-all duration-200"
+                />
+              </div>
+
+              {/* Photo URL */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700  mb-2">
+                  Photo URL
+                </label>
+                <input
+                  name="photo"
+                  type="url"
+                  required
+                  placeholder="https://example.com/image.jpg"
+                  defaultValue={data?.photo || ""}
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300  focus:ring-2 focus:ring-purple-500 focus:border-transparent  transition-all duration-200"
+                />
+              </div>
+
+              {/* User Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    User Name
+                  </label>
                   <input
                     name="username"
                     type="text"
                     readOnly
                     value={user?.displayName || ""}
-                    className="input-field readonly-field"
+                    className="w-full px-4 py-2.5 rounded-lg bg-gray-100 text-gray-700  cursor-not-allowed"
                   />
-                </td>
-              </tr>
-
-              <tr>
-                <th>User Email</th>
-                <td>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    User Email
+                  </label>
                   <input
                     name="email"
                     type="email"
                     readOnly
                     value={user?.email || ""}
-                    className="input-field readonly-field"
+                    className="w-full px-4 py-2.5 rounded-lg bg-gray-100  text-gray-700 cursor-not-allowed"
                   />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+                </div>
+              </div>
 
-        <div className="button-wrapper">
-          <button type="submit" className="btn-submit">
-            Submit Article
-          </button>
+              {/* Submit Button */}
+              <div className="pt-4">
+                <motion.button
+                  type="submit"
+                  className="w-full py-3 px-6 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium rounded-lg shadow-md transition-all duration-200"
+                  whileHover="hover"
+                  whileTap="tap"
+                  variants={buttonVariants}
+                >
+                  Update Article
+                </motion.button>
+              </div>
+            </form>
+          </div>
         </div>
-
-        <ToastContainer />
-      </form>
+        <ToastContainer position="bottom-right" autoClose={3000} />
+      </motion.div>
     </div>
-  </div>
-);
-
+  );
 };
 
 export default Update;

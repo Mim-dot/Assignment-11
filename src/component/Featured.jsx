@@ -38,7 +38,7 @@ const Featured = () => {
           >
             {/* Budget Ribbon */}
             <div className="absolute top-0 right-0 bg-indigo-600 dark:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wide px-4 py-1 rounded-bl-lg rotate-12 shadow-lg select-none pointer-events-none">
-              ${task.budget}
+              ${task.likes}
             </div>
 
             {/* Content */}
@@ -52,15 +52,15 @@ const Featured = () => {
             <p className="text-md mb-4 font-medium text-indigo-800 dark:text-indigo-200">
               {task.category}
             </p>
-            <p className="text-sm text-indigo-700 dark:text-indigo-300 uppercase font-semibold mb-1 tracking-wider">
+            <p className="text-sm text-indigo-700 dark:text-indigo-300 uppercase  mb-1 tracking-wider font-bold">
               Describe
             </p>
             <p className="text-md mb-4 font-medium text-indigo-800 dark:text-indigo-200">
-              {task.Describe}
+              {task.content}
             </p>
 
             <p className="mt-4 text-sm text-indigo-600 dark:text-indigo-300 font-semibold">
-              Deadline:{" "}
+              Deadline : {" "}
               <time dateTime={task.deadline} className="italic">
                 {new Date(task.deadline).toLocaleDateString(undefined, {
                   year: "numeric",

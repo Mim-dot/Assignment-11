@@ -29,8 +29,8 @@ const PostArticle = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black py-10 px-4">
-      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-900 shadow-xl rounded-xl p-8 border border-orange-200 dark:border-gray-700">
+    <div className="min-h-screen main-post bg-white  py-10 px-4 mt-10">
+      <div className="max-w-4xl main-2 mx-auto bg-white  shadow-xl rounded-xl p-8 border border-orange-200 ">
         <h2 className="text-3xl font-bold mb-8 text-center text-orange-600 dark:text-orange-400">
           Post Article
         </h2>
@@ -47,6 +47,7 @@ const PostArticle = () => {
                     <input
                       name="title"
                       type="text"
+                      
                       required
                       placeholder="Article Title"
                       className="table-input"
@@ -62,6 +63,7 @@ const PostArticle = () => {
                     <input
                       name="category"
                       type="text"
+                      
                       list="categoryList"
                       placeholder="Select a Category"
                       required
@@ -82,10 +84,11 @@ const PostArticle = () => {
                   <td>
                     <textarea
                       name="content"
-                      rows="4"
+                      rows="5"
+                     
                       placeholder="Write your article content"
                       required
-                      className="table-input resize-none"
+                      className="table-input resize-none "
                     />
                   </td>
                 </tr>
@@ -98,6 +101,7 @@ const PostArticle = () => {
                     <input
                       name="tags"
                       type="text"
+                      required
                       placeholder="e.g. AI, JavaScript, Web Dev"
                       className="table-input"
                     />

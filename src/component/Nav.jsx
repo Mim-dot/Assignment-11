@@ -82,7 +82,7 @@ const Nav = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className="dropdown dropdown-end lg:hidden">
+      <div className="dropdown dropdown-end lg:hidden nav-drop">
         <div tabIndex={0} role="button" className="btn btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -110,13 +110,13 @@ const Nav = () => {
         </ul>
       </div>
 
-      {/* Desktop Menu */}
+     
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-2">{navLinks}</ul>
       </div>
 
-      {/* Right Side: Avatar or Login Button */}
-      <div className="flex-none">
+     
+      <div className="flex-none drop-nav">
         {user ? (
           <div className="dropdown dropdown-end">
             <div

@@ -1,14 +1,39 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
 import "../index.css"
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 const AllArticles = () => {
-  const data = useLoaderData();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  // const data = useLoaderData();
+  
+const [sortOrder, setSortOrder] = useState("");
 
+
+useEffect(() => {
+    setLoading(true);
+    axios
+      .get(
+        `http://localhost:9000/articles?sort=${sortOrder}`
+      )
+      .then((res) => {
+        setData(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed tofetch marathons:", err);
+        setLoading(false);
+      });
+  }, [sortOrder])
+
+//console.log(sortOrder);
   return (
     <div
-      className="all-artical max-w-7xl mx-auto px-4 py-8 "
+      className="all-artical max-w-7xl mx-auto px-4 py-8 mt-12"
       style={{
         backgroundImage:
           "url('https://i.ibb.co/7tT3GZzC/photo-1503676260728-1c00da094a0bg.jpg')",
@@ -18,7 +43,7 @@ const AllArticles = () => {
         padding: "2rem",
       }}
     >
-      <div className="  bg-white/70 dark:bg-black/60 rounded-xl pointer-events-none"></div>
+      <div className="  bg-white/70 rounded-xl pointer-events-none"></div>
 
       <div className=" ">
         {data.length === 0 ? (
@@ -26,7 +51,7 @@ const AllArticles = () => {
             <h2 className="text-3xl font-bold text-primary mb-10">
               No Articles Found.
             </h2>
-            <div className="flex justify-center items-center">
+            <div className="all-img  flex justify-center items-center ">
               <img
                 src="https://i.ibb.co/kgV4xG9q/real.jpg"
                 alt="No articles"
@@ -36,15 +61,29 @@ const AllArticles = () => {
           </div>
         ) : (
           <>
+
             <h1 className="text-3xl font-bold text-center text-primary mb-10">
                All Articles
             </h1>
+ <div className="mb-6 text-right">
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)} 
+          className="all-drop border border-blue-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">All Articles</option>
+          <option  value="Science">Science</option>
+           <option value="Arts">Arts </option>
+          <option value="Technology">Technology</option>
+        </select>
+     
 
+      </div>
             <div className="grid grid-cols-1 md:grid-cols-4  grid-rows-2 gap-10">
               {data.map((article, index) => (
                 <motion.div
                   key={article._id}
-                  className="rounded-2xl border border-gray-200 dark:border-gray-700 p-6 bg-white dark:bg-gray-900 cursor-pointer transition-transform duration-300 ease-in-out"
+                  className="div-all rounded-2xl border border-gray-200  p-6 bg-white cursor-pointer transition-transform duration-300 ease-in-out"
                   style={{
                     transform:
                       index % 2 === 0
@@ -61,14 +100,14 @@ const AllArticles = () => {
                     {article.title}
                   </h2>
 
-                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  <div className="text-sm text-gray-500 all-ty mb-4 mt-">
                     <span>
                       By <strong>{article.username}</strong>
                     </span>{" "}
-                    · <span>{new Date(article.deadline).toDateString()}</span>
+                  <div className="text-sm text-gray-500 all-ty mb-2 mt-3" ><span>{new Date(article.deadline).toDateString()}</span></div>
                   </div>
 
-                  <div className="prose dark:prose-invert max-w-none line-clamp-4">
+                  <div className="prose max-w-none line-clamp-4">
                     {parse(article.content || "")}
                   </div>
 

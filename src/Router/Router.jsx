@@ -13,7 +13,7 @@ import Abouts from "../component/Abouts";
 import SingleArtical from "../component/SingleArtical";
 import Privet from "../Provider/Privet";
 import Update from "../component/Update";
-
+import CategoriesList from '../component/CategoriesList';
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -82,8 +82,14 @@ export const router = createBrowserRouter([
       {
         path: "/all", 
         element: <AllArticles />,
-        loader: () => fetch("http://localhost:9000/articles"),
+        
       },
+      {
+        path: "/articles/:Science", 
+        element:  <CategoriesList/>,
+       
+      },
+      
       {
         path: "/singleArtical/:id", 
         element: <SingleArtical/>,

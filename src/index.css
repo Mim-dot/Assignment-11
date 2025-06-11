@@ -1,19 +1,125 @@
 @plugin "daisyui";
 @import "tailwindcss";
-
+.dark  #root{
+  background-color: black;
+}
 /* navbar */
 .dark .nav-nav {
   background-color: #0c0c0c;
-  color: #f8f9fc;}
+  color: #f8f9fc;
+}
+.dark .drop-nav{
+  color: #000000;
+}
+.dark .nav-drop{
+  color: rgb(0, 0, 0);
+  background-color: white;
+margin:4px;
+
+}
+
   /* all articals */
   .dark .all-artical {
    background-color: #0c0c0c;
-
+color: #f8f9fc;
   }
-   .dark .all-artical .h2-title{
- 
-  color: #d7e17b;
-} 
-.dark  #root{
+  .dark h2 {
+    color: #f8f9fc;
+  }
+.dark .all-ty {
+    color: #f8f9fc;
+  }
+.dark .div-all {
+    background-color: #000000;
+  }
+  .dark .all-drop{
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+  }
+/* footer */
+.dark .footer {
   background-color: black;
+}
+.dark .footer-a {
+    color: #f8f9fc;
+  }
+.dark .footer-p {
+    color: #f8f9fc;
+  }
+  .dark .motion-footer {
+    background-color: white ;
+    
+  }
+  .dark .motion-footer:hover {
+  background-color: #4f46e5; 
+}
+
+  .dark footer {
+    background-color: black;
+    
+  }
+  .dark svg {
+    color: black;
+  }
+.dark .footer-all{
+  color: rgb(151, 155, 158);
+}
+/* post artical */
+.dark .main-post {
+  background-color: #000000;
+  color: #f8f9fc;
+}
+
+.dark .main-2 {
+  background-color: #2f2f2f; 
+  border: 1px solid #ffffff;
+}
+
+.dark h2 {
+  color: rgb(255, 171, 0); 
+}
+
+.dark table {
+  color: #ffffff;
+}
+
+.dark tr {
+  border-color: #e5e7eb;
+}
+
+.dark .table-input {
+  background-color: #1f2937; 
+  color: #f8f9fc;
+  border: 1px solid #4b5563; 
+}
+
+.dark .table-input::placeholder {
+  color: #9ca3af; 
+}
+
+.dark input[readonly],
+.dark textarea[readonly] {
+  background-color: #374151; 
+  color: #d1d5db; 
+}
+.table-input {
+  @apply w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400 transition mt-2 mb-2;
+}
+/* profile */
+.profile {
+  background: linear-gradient(to bottom, #fce7f3, #dbeafe); 
+}
+
+.dark .profile {
+    background: linear-gradient(to bottom, #471e36, #0a1e38);
+}
+
+.dark .profile-2{
+  background-color: #150f31;
+}
+.dark .profile-gn{
+  color: white;
+}
+.dark .profile-photo{
+  background-color: white;
 }
