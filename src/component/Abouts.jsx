@@ -4,7 +4,7 @@ import { FaUsers, FaTools, FaLightbulb } from "react-icons/fa";
 
 const Abouts = () => {
   return (
-    <section className="max-w-6xl mx-auto px-4 py-16">
+    <section className="max-w-6xl mx-auto px-4 py-16 mt-6">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -12,7 +12,7 @@ const Abouts = () => {
         className="text-center mb-12"
       >
         <h2 className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-4">About Us</h2>
-        <p className="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto text-lg">
+        <p className="about-p text-gray-700 dark:text-gray-300 max-w-2xl mx-auto text-lg">
           Welcome to TaskLink — a modern platform where curiosity meets creativity. We empower users to share insights, explore trending topics, and connect with digital creators.
         </p>
       </motion.div>
