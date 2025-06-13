@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const voices = [
   {
@@ -28,51 +28,61 @@ const voices = [
 
 const ExtraSections2 = () => {
   const [index, setIndex] = useState(0);
-  const visibleCount = 3;
+  const radius = 120;
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % voices.length);
     }, 4000);
-    return () => clearInterval(timer);
+    return () => clearInterval(interval);
   }, []);
 
-  const visibleVoices = voices
-    .slice(index, index + visibleCount)
-    .concat(voices.slice(0, Math.max(0, index + visibleCount - voices.length)));
-
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-16">
-      <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-10 text-center">
+    <div className="extra2 w-full max-w-4xl mx-auto px-4 py-16 mb-5">
+      <h2 className="extra2 text-3xl font-bold text-zinc-900  text-center mb-12">
         💬 Voices of Impact
       </h2>
 
-      <div className="flex gap-6 overflow-hidden">
-        {visibleVoices.map((voice, i) => (
-          <AnimatePresence key={i}>
+      <div className="relative h-[400px] flex items-center justify-center overflow-hidden   rounded-3xl shadow-xl">
+        {voices.map((voice, i) => {
+          const angle = ((360 / voices.length) * ((i - index + voices.length) % voices.length)) * (Math.PI / 180);
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+
+          const isActive = i === index;
+
+          return (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6 }}
-              className="flex-1 min-w-[300px] bg-white dark:bg-zinc-900 rounded-2xl shadow-md border border-zinc-200 dark:border-zinc-700 p-6"
+              key={i}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{
+                x,
+                y,
+                opacity: isActive ? 1 : 0.5,
+                scale: isActive ? 1.2 : 0.8,
+                zIndex: isActive ? 10 : 1,
+              }}
+              transition={{ duration: 0.8, type: "spring" }}
+              className={`absolute w-64 text-center p-4 rounded-xl border ${
+                isActive
+                  ? "bg-white dark:bg-zinc-800 shadow-lg border-blue-400"
+                  : "bg-zinc-100 dark:bg-zinc-700 border-transparent"
+              }`}
             >
-              <div className="flex items-center gap-4 mb-4">
-                <img
-                  src={voice.avatar}
-                  alt={voice.name}
-                  className="w-14 h-14 rounded-full border-2 border-blue-500"
-                />
-                <h3 className="text-lg font-semibold text-zinc-800 dark:text-white">
-                  {voice.name}
-                </h3>
-              </div>
-              <p className="text-zinc-600 dark:text-zinc-300 text-sm">
+              <img
+                src={voice.avatar}
+                alt={voice.name}
+                className="w-16 h-16 mx-auto mb-3 rounded-full border-2 border-blue-500"
+              />
+              <h3 className="text-md font-semibold text-zinc-800 dark:text-white">
+                {voice.name}
+              </h3>
+              <p className="text-sm text-zinc-600 dark:text-zinc-300 mt-2 italic">
                 “{voice.quote}”
               </p>
             </motion.div>
-          </AnimatePresence>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

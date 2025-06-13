@@ -24,7 +24,7 @@ const Nav = () => {
   }, [isDark]);
 
   const { user, logOut } = useContext(AuthContext);
-
+  //console.log(user);
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -76,7 +76,7 @@ const Nav = () => {
   );
 
   return (
-    <div className="navbar nav-nav bg-base-100 bg-white text-[#1F2937] border-[#E5E7EB] border-b hover:bg-[#f4f4f7] backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50">
+    <div className="navbar nav-nav  bg-white text-[#1F2937] border-[#E5E7EB] border-b hover:bg-[#f4f4f7] backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50">
       <div className="flex-1">
         <a className="btn btn-ghost italic text-2xl text-[#77c97d] font-bold">Lilo</a>
       </div>
@@ -101,7 +101,7 @@ const Nav = () => {
           {navLinks}
           {user && (
             <>
-                   <li><NavLink to={`/myarticles/${user?.uid}`}>My Articles</NavLink></li>
+              <li><NavLink to={`/myarticles/${user.email}`}>My Articles</NavLink></li>
               <li><NavLink to="/post">Post Article</NavLink></li>
               <li><NavLink to="/profile">Profile</NavLink></li>
               <li><button onClick={handleLogOut}>Log out</button></li>
@@ -138,11 +138,13 @@ const Nav = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52"
             >
-                <li><NavLink to={`/myarticles/${user?.uid}`}>My Articles</NavLink></li>
+                <li><NavLink to={`/myarticles/${user.email}`}>My Articles</NavLink></li>
                 {/* to={`/myarticles/${user?.uid}`} */}
               <li><NavLink to="/post">Post Article</NavLink></li>
               <li><NavLink to="/profile">Profile</NavLink></li>
-              <li><button onClick={handleLogOut}>Log out</button></li>
+               <li><button onClick={handleLogOut}>Log out</button></li> 
+                
+        
             </ul>
           </div>
         ) : (

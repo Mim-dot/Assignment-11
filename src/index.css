@@ -123,3 +123,108 @@ color: #f8f9fc;
 .dark .profile-photo{
   background-color: white;
 }
+/* categories list */
+.dark .list{
+  background-color: black;
+}
+.dark .list-motion{
+  background-color: #5dc8cc;
+  color: #edf1f1;
+}
+.dark .list-motion h2{
+ 
+   color: hsl(315, 95%, 85%);
+}
+.dark .list-motion-div{
+ 
+  color: hsl(315, 95%, 85%);
+}
+/* update */
+.update {
+  background: linear-gradient(to bottom right, #e0e7ff, #ddd6fe);
+}
+
+.dark .update{
+  background: linear-gradient(to bottom right, #050505, #35343d);
+}
+.dark .motion-div{
+  background-color: #000000;
+}
+.dark .Lottie{
+ background: linear-gradient(to bottom right, #0d0d0e, #39393a);
+}
+.Lottie {
+  background: linear-gradient(to bottom right, #e0d7ff, #c7d2fe);
+}
+.dark .form{
+  color: rgb(219, 162, 56);
+}
+.dark label{
+  color: white;
+}
+.singlear {
+  background: linear-gradient(to bottom, #fff6f6, #f6f6ff);
+}
+.dark .singlear {
+  background: linear-gradient(to bottom, #948e6a, #45455e);
+}
+.dark .tym {
+  color: #150f31;
+}
+.dark .com {
+  background-color: rgb(214, 15, 82);
+  border: 1px solid transparent;  
+  text-align: center;    
+  padding: 8px 16px;  
+  border-radius: 20px;
+  color: #ffffff;
+}
+.dark .comment{
+  background-color: #9ca3af;
+}
+.dark .comment-h2{
+color: #f36e39;
+}
+.dark .com-box{
+  background-color: #d1d5db;
+}
+.extra2 {
+ 
+  background: linear-gradient(to bottom, #fafafa, #ffffff, #f4f4f5); 
+}
+
+.dark .extra2 { 
+  color: white;
+  background: linear-gradient(to bottom, #18181b, #27272a, #18181b); 
+}
+.extra {
+  background: linear-gradient(to bottom right, #f4f4f5, #ffffff, #e5e7eb); 
+}
+
+.dark .extra {
+  background: linear-gradient(to bottom right, #18181b, #27272a, #18181b); 
+}
+.dark .extra-h2{
+  color: #ffffff;
+}
+.dark .extra-motion{
+ background-color: #18181b;
+}
+.dark .extra h3{
+  color: rgb(255, 254, 254);
+}
+.dark .extra p{
+ color: #d4d4d8;
+}
+.dark .feature{
+  background-color:  #18181b;
+}
+.dark .feature h3{
+  color: #ffffff;
+}
+.dark .feature-p{
+  color:#d8b4fe;
+}
+.dark .feature-pp{
+  color:#ffffff;
+}

@@ -56,14 +56,13 @@ const Login = () => {
           whileHover={{ scale: 1.02 }}
           className="text-white text-center md:text-left"
         >
-          <img src="/your-logo.svg" alt="Logo" className="w-28 mx-auto md:mx-0 mb-6" />
-          <motion.h1
+           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-4xl text-amber-50 font-bold mb-4"
+            className="text-4xl text-amber-600 font-bold mb-4"
           >
-            Welcome to TaskLink
+            Welcome to Lilo
           </motion.h1>
           <p className="text-lg text-black max-w-sm mx-auto md:mx-0">
             Connect with freelancers. Get your tasks done quickly & easily. Log in to get started.

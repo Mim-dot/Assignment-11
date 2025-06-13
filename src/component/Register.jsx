@@ -80,9 +80,9 @@ const Register = () => {
           transition={{ duration: 0.7 }}
           className="text-center md:text-left text-black dark:text-white"
         >
-          <h1 className="text-4xl font-bold mb-3">Join TaskLink</h1>
+          <h1 className="text-4xl font-bold mb-3">Join Lilo</h1>
           <p className="text-lg text-gray-700 dark:text-gray-300 max-w-sm mx-auto md:mx-0">
-            Create your account to connect with freelancers or get hired for small tasks.
+            Create your account to connect with Knowledge Sharing Platform.
           </p>
         </motion.div>
 

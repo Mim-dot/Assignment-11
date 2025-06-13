@@ -34,7 +34,7 @@ const Update = () => {
       });
   };
 
-  // Motion variants
+ 
   const formVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
@@ -51,18 +51,18 @@ const Update = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 py-8 px-4 sm:px-6">
+    <div className="update min-h-screen py-8 px-4 sm:px-6">
       <motion.div
-        className="max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
+        className="motion-div mt-11 max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
         variants={formVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="flex flex-col md:flex-row">
-          {/* Lottie Animation Section (Left) */}
-          <div className="w-full md:w-1/2 bg-gradient-to-br from-purple-100 to-indigo-100  flex items-center justify-center p-8">
+        <div className="flex  flex-col md:flex-row">
+         
+          <div className="w-full Lottie md:w-1/2 flex items-center justify-center p-8">
             <div className="max-w-md w-full">
-              <Lottie animationData={formlotti} loop={true} />
+              <Lottie className="" animationData={formlotti} loop={true} />
               <div className="text-center mt-6">
                 <h3 className="text-xl font-semibold text-purple-800 ">Edit with Confidence</h3>
                 <p className="text-purple-600  mt-2">
@@ -72,8 +72,8 @@ const Update = () => {
             </div>
           </div>
 
-          {/* Form Section (Right) */}
-          <div className="w-full md:w-1/2 p-6 sm:p-8">
+          
+          <div className="w-full form md:w-1/2 p-6 sm:p-8">
             <h2 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600   mb-6 mt-8">
               Update Your Article
             </h2>

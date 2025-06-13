@@ -33,7 +33,7 @@ useEffect(() => {
 //console.log(sortOrder);
   return (
     <div
-      className="all-artical max-w-7xl mx-auto px-4 py-8 mt-12"
+      className="all-artical mt-17 mb-2 max-w-7xl mx-auto px-4 py-8 "
       style={{
         backgroundImage:
           "url('https://i.ibb.co/7tT3GZzC/photo-1503676260728-1c00da094a0bg.jpg')",

@@ -92,5 +92,6 @@ const googleProvider = new GoogleAuthProvider();
     <AuthContext.Provider value={authData}> {children}</AuthContext.Provider>
   );
 };
+export const useAuth = () => React.useContext(AuthContext);
 
 export default AuthProvider;

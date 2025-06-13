@@ -1,11 +1,11 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom"; 
 import { useState, useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 
 
 export default function SingleArtical() {
   const article = useLoaderData();
-  const { user } = useContext(AuthContext); // get real user info
+  const { user } = useContext(AuthContext); 
   const [commentInput, setCommentInput] = useState("");
   const [comments, setComments] = useState(article.comments || []);
   const [likes, setLikes] = useState(article.likes || 0);
@@ -45,9 +45,9 @@ export default function SingleArtical() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      {/* ARTICLE */}
-          <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-gradient-to-b from-[#fff6f6] to-[#f6f6ff] p-6 rounded-xl shadow-xl">
+      {/* */}
+          <div className="max-w-4xl mx-auto p-6 mt-13 ">
+      <div className="singlear p-6 rounded-xl shadow-xl">
         {/* Author Info */}
         <div className="flex items-center gap-4 mb-6">
           <img
@@ -57,7 +57,7 @@ export default function SingleArtical() {
           />
           <div>
             <p className="font-bold text-lg">{article.username}</p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 tym">
               {new Date(article.deadline).toLocaleDateString()}
             </p>
           </div>
@@ -83,15 +83,15 @@ export default function SingleArtical() {
           <button onClick={handleLike} className="px-4 py-2 bg-pink-600 text-white rounded-full hover:scale-105 transition">
             ❤️ Like ({likes})
           </button>
-          <span className="text-gray-600">{comments.length} Comments</span>
+          <span className="text-gray-600 com">{comments.length} Comments</span>
         </div>
       </div>
     </div>
 
       
-      {/* COMMENTS */}
-      <div className="mt-10 bg-white p-5 rounded-xl shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">Comments</h2>
+      {/**/}
+      <div className="comment mt-10 bg-white p-5 rounded-xl shadow-md">
+        <h2 className="comment-h2 text-2xl font-semibold mb-4">Comments</h2>
         <div className="flex items-center gap-2 mb-4">
           <input
             className="flex-1 p-2 border rounded-md"
@@ -106,7 +106,7 @@ export default function SingleArtical() {
         <div className="space-y-4">
           {comments.length > 0 ? (
             comments.map((c, idx) => (
-              <div key={idx} className="bg-gray-100 p-4 rounded-lg flex gap-3 items-start">
+              <div key={idx} className="com-box bg-gray-100 p-4 rounded-lg flex gap-3 items-start">
                 <img
                   src={c.user_photo}
                   alt={c.user_name}
@@ -147,4 +147,4 @@ export default function SingleArtical() {
       </div>
     </div>
   );
-}
+} 

@@ -3,17 +3,6 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// Dummy articles/comments (replace with API/database data later)
-const dummyArticles = [
-  { id: 1, title: "My First Post", createdAt: "2024-01-10" },
-  { id: 2, title: "React Tips", createdAt: "2024-02-20" },
-];
-
-const dummyComments = [
-  { id: 1, content: "Great post!", articleId: 1 },
-  { id: 2, content: "Very helpful.", articleId: 2 },
-];
-
 const Profile = () => {
   document.title = "Profile";
   const { user, updateUser, setUser } = useContext(AuthContext);
@@ -22,6 +11,51 @@ const Profile = () => {
   const [tab, setTab] = useState("articles");
   const [name, setName] = useState(user?.displayName || "");
   const [photo, setPhoto] = useState(user?.photoURL || "");
+  const [articles, setArticles] = useState([]);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+  if (user?.email) {
+    // Fetch articles posted by user
+    fetch('http://localhost:9000/myarticles')
+      .then(res => res.json())
+      .then(data => {
+        console.log("All articles from /myarticles:", data);
+        const arr = Array.isArray(data) ? data : [];
+        const filtered = arr.filter(article => article.userEmail === user.email);
+        console.log("Filtered articles by user email:", filtered);
+        setArticles(filtered);
+      })
+      .catch(err => console.error("Failed to fetch articles", err));
+
+    // Fetch all articles to extract user's comments
+    fetch('http://localhost:9000/articles')
+      .then(res => res.json())
+      .then(data => {
+        const allArticles = Array.isArray(data) ? data : [];
+        const userComments = [];
+
+        allArticles.forEach(article => {
+          (article.comments || []).forEach(comment => {
+            if (comment.user_email === user.email) {
+              userComments.push({
+                _id: comment._id || `${article._id}-${Math.random()}`,
+                comment: comment.comment,
+                articleId: article._id,
+                user_name: comment.user_name,
+                user_photo: comment.user_photo,
+                date: comment.date,
+              });
+            }
+          });
+        });
+
+        setComments(userComments);
+      })
+      .catch(err => console.error("Failed to fetch comments", err));
+  }
+}, [user?.email]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,20 +70,15 @@ const Profile = () => {
       });
     } catch (err) {
       console.error(err);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
-      });
+      toast.error("Failed to update profile");
     }
-    
   };
 
   return (
-    <div className="profile flex justify-center items-center p-4  min-h-screen mt-5">
+    <div className="profile flex justify-center items-center p-4 min-h-screen mt-5">
       {user ? (
         <div className="profile-2 w-full max-w-4xl bg-white shadow-lg rounded-lg p-6">
-          {/* Profile Header */}
+          {/* Header */}
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
             <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring-2 ring-offset-2 overflow-hidden">
               <img
@@ -58,104 +87,96 @@ const Profile = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className=" text-center lg:text-left">
-              <div className="profile-gn font-bold text-[18px] text-gray-700">
-                Gmail : <span className="text-gray-600 profile-gn">{user.email}</span>
+            <div className="text-center lg:text-left">
+              <div className="font-bold text-[18px] text-gray-700">
+                Gmail: <span className="text-gray-600">{user.email}</span>
               </div>
-              <div className="profile-gn font-bold text-[18px] mt-2 text-gray-700 profile-gn">
-                Name :{" "}
-                <span className="text-gray-600 profile-gn">
+              <div className="font-bold text-[18px] mt-2 text-gray-700">
+                Name:{" "}
+                <span className="text-gray-600">
                   {user.displayName || "User"}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Tabs Navigation */}
+          {/* Tabs */}
           <div className="flex justify-center mt-6 space-x-4">
-            <button
-              className={`px-4 py-2 rounded ${
-                tab === "articles" ? "bg-blue-500 text-white" : "bg-gray-200"
-              }`}
-              onClick={() => setTab("articles")}
-            >
-              Articles
-            </button>
-            <button
-              className={`px-4 py-2 rounded ${
-                tab === "comments" ? "bg-blue-500 text-white" : "bg-gray-200"
-              }`}
-              onClick={() => setTab("comments")}
-            >
-              Comments
-            </button>
-            <button
-              className={`px-4 py-2 rounded ${
-                tab === "edit" ? "bg-blue-500 text-white" : "bg-gray-200"
-              }`}
-              onClick={() => setTab("edit")}
-            >
-              Edit Profile
-            </button>
+            {["articles", "comments", "edit"].map((type) => (
+              <button
+                key={type}
+                className={`px-4 py-2 rounded ${
+                  tab === type ? "bg-blue-500 text-white" : "bg-gray-200"
+                }`}
+                onClick={() => setTab(type)}
+              >
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+              </button>
+            ))}
           </div>
 
-         
+          {/* Content */}
           <div className="mt-6">
-        
             {tab === "articles" && (
               <div className="space-y-4">
-                {dummyArticles.map((article) => (
-                  <div
-                    key={article.id}
-                    className="p-4 border rounded-md bg-gray-50"
-                  >
-                    <h3 className="text-lg font-semibold">{article.title}</h3>
-                    <p className="text-sm text-gray-500">
-                      Posted on{" "}
-                      {new Date(article.createdAt).toLocaleDateString()}
-                    </p>
-                  </div>
-                ))}
+                {Array.isArray(articles) && articles.length > 0 ? (
+                  articles.map((article) => (
+                    <div
+                      key={article._id}
+                      className="p-4 border rounded-md bg-gray-50"
+                    >
+                      <h3 className="text-lg font-semibold">{article.title}</h3>
+                      <p className="text-sm text-gray-500">
+                        Posted on{" "}
+                        {new Date(article.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No articles posted yet.</p>
+                )}
               </div>
             )}
 
-            {/* Comments  */}
             {tab === "comments" && (
               <div className="space-y-4">
-                {dummyComments.map((comment) => (
-                  <div
-                    key={comment.id}
-                    className="p-4 border rounded-md bg-gray-50"
-                  >
-                    <p>{comment.content}</p>
-                    <p className="text-xs text-gray-500">
-                      On article #{comment.articleId}
-                    </p>
-                  </div>
-                ))}
+                {Array.isArray(comments) && comments.length > 0 ? (
+                  comments.map((comment) => (
+                    <div
+                      key={comment._id}
+                      className="p-4 border rounded-md bg-gray-50"
+                    >
+                      <p>{comment.comment}</p>
+                      <p className="text-xs text-gray-500">
+                        On article #{comment.articleId}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No comments made yet.</p>
+                )}
               </div>
             )}
 
-            {/* Edit Profile  */}
             {tab === "edit" && (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex gap-4 items-center">
-                  <label className="w-1/3 text-lg font-semibold profile-photo">Name:</label>
+                  <label className="w-1/3 text-lg font-semibold">Name:</label>
                   <input
                     type="text"
-                    className="w-2/3 p-2 border rounded profile-photo"
+                    className="w-2/3 p-2 border rounded"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
                   />
                 </div>
                 <div className="flex gap-4 items-center">
-                  <label className="w-1/3 text-lg font-semibold profile-photo">
+                  <label className="w-1/3 text-lg font-semibold">
                     Photo URL:
                   </label>
                   <input
                     type="url"
-                    className="w-2/3 p-2 border rounded profile-photo"
+                    className="w-2/3 p-2 border rounded"
                     value={photo}
                     onChange={(e) => setPhoto(e.target.value)}
                     required
@@ -173,17 +194,10 @@ const Profile = () => {
           <ToastContainer />
         </div>
       ) : (
-        <p className="text-center text-xl text-gray-700">
-          Loading user info...
-        </p>
+        <p className="text-center text-xl text-gray-700">Loading user info...</p>
       )}
     </div>
   );
 };
 
 export default Profile;
-
-
-
-
-

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Featured = () => {
-   document.title = "Featured";
+  document.title = "Featured";
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,59 +30,72 @@ const Featured = () => {
 
   return (
     <div className="p-6">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {tasks.map((task) => (
-          <Link
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {tasks.map((task, index) => (
+          <motion.div
             key={task._id}
-            to={`/taskdetails/${task._id}`}
-            className="relative block bg-gradient-to-br from-purple-50 to-indigo-100 dark:from-[#1e1b4b] dark:to-[#312e81] rounded-xl p-6 shadow-xl hover:shadow-2xl transition-transform transform hover:-translate-y-1 no-underline"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+            whileHover={{ scale: 1.04, rotate: -0.5 }}
+            className="relative group bg-white feature  border border-purple-300 dark:border-indigo-800 p-6 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300"
           >
-            {/* Budget Ribbon */}
-            <div className="absolute top-0 right-0 bg-indigo-600 dark:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wide px-4 py-1 rounded-bl-lg rotate-12 shadow-lg select-none pointer-events-none">
-              ${task.likes}
-            </div>
+            {/* Glowing animated border layer */}
+            <motion.div
+              className="absolute  -inset-1 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 blur-2xl opacity-20 group-hover:opacity-40 rounded-2xl z-[-1]"
+              aria-hidden="true"
+            />
 
-            {/* Content */}
-            <h3 className="text-2xl font-extrabold text-indigo-900 dark:text-white mb-3 tracking-tight">
-              {task.Task}
-            </h3>
+            <Link to={`/singleArtical/${task._id}`} className="block no-underline">
+            
+              <div className="absolute top-0 right-0 bg-pink-600 text-white font-bold text-xs px-3 py-1 rounded-bl-xl rotate-6 shadow-md pointer-events-none select-none">
+                ❤️ {task.likes}
+              </div>
 
-            <p className="text-sm text-indigo-700 dark:text-indigo-300 uppercase font-semibold mb-1 tracking-wider">
-              Category
-            </p>
-            <p className="text-md mb-4 font-medium text-indigo-800 dark:text-indigo-200">
-              {task.category}
-            </p>
-            <p className="text-sm text-indigo-700 dark:text-indigo-300 uppercase  mb-1 tracking-wider font-bold">
-              Describe
-            </p>
-            <p className="text-md mb-4 font-medium text-indigo-800 dark:text-indigo-200">
-              {task.content}
-            </p>
+              {/* Title */}
+              <h3 className=" text-2xl font-extrabold text-indigo-800 dark:text-white mb-2">
+                {task.title}
+              </h3>
 
-            <p className="mt-4 text-sm text-indigo-600 dark:text-indigo-300 font-semibold">
-              Deadline : {" "}
-              <time dateTime={task.deadline} className="italic">
-                {new Date(task.deadline).toLocaleDateString(undefined, {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </time>
-            </p>
+              {/* Category */}
+              <p className="feature-p text-xs uppercase font-semibold text-purple-600 dark:text-purple-300 mb-1 tracking-wide">
+                Category
+              </p>
+              <p className="feature-pp text-md text-gray-800 dark:text-gray-200 mb-4 font-medium">
+                {task.category}
+              </p>
 
-            {/* Decorative dots */}
-            <div className="absolute bottom-4 right-4 flex space-x-1 pointer-events-none">
-              {[...Array(4)].map((_, i) => (
-                <span
-                  key={i}
-                  className={`block w-2 h-2 rounded-full bg-indigo-700 dark:bg-indigo-900 opacity-${
-                    40 - i * 10
-                  }`}
-                />
-              ))}
-            </div>
-          </Link>
+              {/* Description */}
+              <p className="feature-p text-xs uppercase font-bold text-purple-600  mb-1 tracking-wide">
+                Describe
+              </p>
+              <p className="feature-pp text-sm text-gray-800 dark:text-gray-200 mb-4">
+                {task.content}
+              </p>
+
+
+              <p className="feature-p text-sm font-semibold text-indigo-600 dark:text-indigo-300">
+                Deadline:{" "}
+                <time dateTime={task.deadline} className="italic">
+                  {new Date(task.deadline).toLocaleDateString(undefined, {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
+              </p>
+
+             
+              <div className="absolute bottom-4 right-4 flex gap-1 pointer-events-none">
+                {[...Array(4)].map((_, i) => (
+                  <span
+                    key={i}
+                    className={`w-2 h-2 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-${50 - i * 10}`}
+                  />
+                ))}
+              </div>
+            </Link>
+          </motion.div>
         ))}
       </div>
     </div>

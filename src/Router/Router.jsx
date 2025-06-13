@@ -14,6 +14,9 @@ import SingleArtical from "../component/SingleArtical";
 import Privet from "../Provider/Privet";
 import Update from "../component/Update";
 import CategoriesList from '../component/CategoriesList';
+import MyArticles from "../component/MyArticles";
+import { getAuth } from "firebase/auth";
+import myArticlesLoader from "../component/myArticlesLoader";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -70,15 +73,25 @@ export const router = createBrowserRouter([
         ) ,
       },
       {
-        path: "/myarticles/:id",
+        path: "/myarticles/:email",
         element:(
   <Privet><MyArticals/></Privet>
           
         ) ,
-        loader: ({ params }) =>
-          fetch(`http://localhost:9000/myarticals/${params.id}`),
+        // loader: myArticlesLoader(),
+        // loader: ({ params }) =>
+        //   fetch(`http://localhost:9000/myarticles/${params.id}`),
       },
- 
+// routes
+
+// {
+//   path: "/myarticles/:id",
+//   element: <Privet><MyArticals/></Privet>,
+//   loader: myArticlesLoader,
+  
+// },
+
+
       {
         path: "/all", 
         element: <AllArticles />,
@@ -92,14 +105,14 @@ export const router = createBrowserRouter([
       
       {
         path: "/singleArtical/:id", 
-        element: <SingleArtical/>,
+        element:<Privet> <SingleArtical/></Privet>  ,
        loader: ({ params }) =>
   fetch(`http://localhost:9000/articles/${params.id}`)
 
       },
       {
         path: "/update/:id", 
-        element: <Update />,
+        element:<Privet> <Update /></Privet>,
           loader: ({ params }) => fetch(`http://localhost:9000/articles/${params.id}`),
       },
       {

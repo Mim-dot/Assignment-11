@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+// Enhanced ExtraSections (Top Contributors)
+import React, { useEffect, useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const contributors = [
   {
@@ -33,51 +35,63 @@ const contributors = [
   },
 ];
 
+const visibleCount = 4;
+
 const ExtraSections = () => {
   const [startIndex, setStartIndex] = useState(0);
-  const visibleCount = 4;
 
   useEffect(() => {
     const interval = setInterval(() => {
       setStartIndex((prev) => (prev + 1) % contributors.length);
-    }, 3000); // change every 3 seconds
-
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
-  const getVisibleContributors = () => {
-    const visible = [];
-    for (let i = 0; i < visibleCount; i++) {
-      visible.push(contributors[(startIndex + i) % contributors.length]);
-    }
-    return visible;
-  };
+  const visibleContributors = useMemo(() => {
+    return Array.from({ length: visibleCount }, (_, i) => {
+      return contributors[(startIndex + i) % contributors.length];
+    });
+  }, [startIndex]);
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold text-zinc-800 dark:text-white mb-6">
+    <div className="extra w-full max-w-7xl mx-auto px-4 py-24 relative overflow-hidden mb-5 rounded-3xl shadow-inner">
+      <h2 className="extra-h2 text-4xl font-extrabold text-center text-zinc-900 dark:text-white mb-16">
         🌟 Top Contributors
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 transition-all">
-        {getVisibleContributors().map((person, index) => (
-          <div
-            key={index}
-            className="bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-md border border-zinc-200 dark:border-zinc-700 text-center"
-          >
-            <img
-              src={person.avatar}
-              alt={person.name}
-              className="w-20 h-20 rounded-full mb-4 border-4 border-blue-500 mx-auto"
-            />
-            <h3 className="text-lg font-semibold text-zinc-800 dark:text-white">
-              {person.name}
-            </h3>
-            <p className="text-zinc-600 dark:text-zinc-300 text-sm mt-2">
-              “{person.quote}”
-            </p>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+        <AnimatePresence initial={false}>
+          {visibleContributors.map((person, index) => (
+            <motion.div
+              key={person.name + index}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="relative extra-motion bg-white  rounded-2xl p-6 border border-transparent hover:border-blue-500 hover:shadow-xl transition-all duration-300 group"
+            >
+              <motion.img
+                src={person.avatar}
+                alt={person.name}
+                className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-500 group-hover:scale-110 transition-transform duration-300"
+                whileHover={{ rotate: 3 }}
+              />
+              <h3 className="extra-h3 text-xl font-semibold text-zinc-800  text-center">
+                {person.name}
+              </h3>
+              <p className="text-sm text-zinc-600  mt-2 text-center italic">
+                “{person.quote}”
+              </p>
+              <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-blue-500 animate-ping opacity-70"></div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* Decorative Glow */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-blue-400 opacity-20 blur-3xl rounded-full animate-pulse" />
+        <div className="absolute bottom-0 right-1/2 transform translate-x-1/2 w-80 h-80 bg-purple-400 opacity-20 blur-3xl rounded-full animate-pulse delay-2000" />
       </div>
     </div>
   );
