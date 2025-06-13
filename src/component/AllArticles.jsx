@@ -1,24 +1,28 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
 import "../index.css"
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import { useTypewriter } from 'react-simple-typewriter';
 const AllArticles = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   // const data = useLoaderData();
   
 const [sortOrder, setSortOrder] = useState("");
-
+const [text] = useTypewriter({
+    words: ["NO Data Found"],
+    loop: 0,
+  });
 
 useEffect(() => {
     setLoading(true);
     axios
       .get(
-        `http://localhost:9000/articles?sort=${sortOrder}`
+        `https://assi11-mim-dots-projects.vercel.app/articles?sort=${sortOrder}`
       )
       .then((res) => {
         setData(res.data);
@@ -47,18 +51,12 @@ useEffect(() => {
 
       <div className=" ">
         {data.length === 0 ? (
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-primary mb-10">
-              No Articles Found.
-            </h2>
-            <div className="all-img  flex justify-center items-center ">
-              <img
-                src="https://i.ibb.co/kgV4xG9q/real.jpg"
-                alt="No articles"
-                className="mx-auto"
-              />
-            </div>
+           <div className="text-center text-2xl sm:text-3xl font-semibold text-purple-600 mb-10">
+          <span>{text}</span>
+          <div className="flex justify-center items-center mt-4">
+           
           </div>
+        </div>
         ) : (
           <>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // use react-router-dom for web projects
+import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 
 const Error = () => {

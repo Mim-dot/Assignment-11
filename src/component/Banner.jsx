@@ -1,6 +1,6 @@
 import React from "react";
 import CountUp from "react-countup";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 
 const Banner = () => {
   return (

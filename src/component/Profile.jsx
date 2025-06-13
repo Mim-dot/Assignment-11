@@ -15,28 +15,39 @@ const Profile = () => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-  if (user?.email) {
-    // Fetch articles posted by user
-    fetch('http://localhost:9000/myarticles')
-      .then(res => res.json())
-      .then(data => {
-        console.log("All articles from /myarticles:", data);
-        const arr = Array.isArray(data) ? data : [];
-        const filtered = arr.filter(article => article.userEmail === user.email);
-        console.log("Filtered articles by user email:", filtered);
-        setArticles(filtered);
-      })
-      .catch(err => console.error("Failed to fetch articles", err));
+    const fetchData = async () => {
+      if (!user?.email) return;
 
-    // Fetch all articles to extract user's comments
-    fetch('http://localhost:9000/articles')
-      .then(res => res.json())
-      .then(data => {
+      try {
+        const token = await user.getIdToken();
+
+        // Fetch user's articles
+        const articlesRes = await fetch("https://assi11-mim-dots-projects.vercel.app/myarticles", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!articlesRes.ok) {
+          throw new Error("Unauthorized access");
+        }
+
+        const data = await articlesRes.json();
+        const arr = Array.isArray(data) ? data : [];
+        setArticles(arr);
+      } catch (err) {
+        console.error("Failed to fetch articles", err);
+      }
+
+      try {
+        const res = await fetch("https://assi11-mim-dots-projects.vercel.app/articles");
+        const data = await res.json();
+
         const allArticles = Array.isArray(data) ? data : [];
         const userComments = [];
 
-        allArticles.forEach(article => {
-          (article.comments || []).forEach(comment => {
+        allArticles.forEach((article) => {
+          (article.comments || []).forEach((comment) => {
             if (comment.user_email === user.email) {
               userComments.push({
                 _id: comment._id || `${article._id}-${Math.random()}`,
@@ -51,11 +62,13 @@ const Profile = () => {
         });
 
         setComments(userComments);
-      })
-      .catch(err => console.error("Failed to fetch comments", err));
-  }
-}, [user?.email]);
+      } catch (err) {
+        console.error("Failed to fetch comments", err);
+      }
+    };
 
+    fetchData();
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,14 +101,11 @@ const Profile = () => {
               />
             </div>
             <div className="text-center lg:text-left">
-              <div className="font-bold text-[18px] text-gray-700">
-                Gmail: <span className="text-gray-600">{user.email}</span>
+              <div className="gmail font-bold text-[18px] text-gray-700">
+                Gmail : <span className="text-gray-600 gmail">{user.email}</span>
               </div>
-              <div className="font-bold text-[18px] mt-2 text-gray-700">
-                Name:{" "}
-                <span className="text-gray-600">
-                  {user.displayName || "User"}
-                </span>
+              <div className=" gmail font-bold text-[18px] mt-2 text-gray-700">
+                Name : <span className="text-gray-600 gmail">{user.displayName || "User"}</span>
               </div>
             </div>
           </div>
@@ -105,9 +115,7 @@ const Profile = () => {
             {["articles", "comments", "edit"].map((type) => (
               <button
                 key={type}
-                className={`px-4 py-2 rounded ${
-                  tab === type ? "bg-blue-500 text-white" : "bg-gray-200"
-                }`}
+                className={`px-4 py-2 rounded ${tab === type ? "bg-blue-500 text-white" : "bg-gray-200"}`}
                 onClick={() => setTab(type)}
               >
                 {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -121,14 +129,10 @@ const Profile = () => {
               <div className="space-y-4">
                 {Array.isArray(articles) && articles.length > 0 ? (
                   articles.map((article) => (
-                    <div
-                      key={article._id}
-                      className="p-4 border rounded-md bg-gray-50"
-                    >
+                    <div key={article._id} className="p-4 border rounded-md bg-gray-50">
                       <h3 className="text-lg font-semibold">{article.title}</h3>
                       <p className="text-sm text-gray-500">
-                        Posted on{" "}
-                        {new Date(article.createdAt).toLocaleDateString()}
+                        Posted on {new Date(article.createdAt).toLocaleDateString()}
                       </p>
                     </div>
                   ))
@@ -142,14 +146,9 @@ const Profile = () => {
               <div className="space-y-4">
                 {Array.isArray(comments) && comments.length > 0 ? (
                   comments.map((comment) => (
-                    <div
-                      key={comment._id}
-                      className="p-4 border rounded-md bg-gray-50"
-                    >
+                    <div key={comment._id} className="p-4 border rounded-md bg-gray-50">
                       <p>{comment.comment}</p>
-                      <p className="text-xs text-gray-500">
-                        On article #{comment.articleId}
-                      </p>
+                      <p className="text-xs text-gray-500">On article #{comment.articleId}</p>
                     </div>
                   ))
                 ) : (
@@ -164,19 +163,17 @@ const Profile = () => {
                   <label className="w-1/3 text-lg font-semibold">Name:</label>
                   <input
                     type="text"
-                    className="w-2/3 p-2 border rounded"
+                    className="photo w-2/3 p-2 border rounded"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
                   />
                 </div>
                 <div className="flex gap-4 items-center">
-                  <label className="w-1/3 text-lg font-semibold">
-                    Photo URL:
-                  </label>
+                  <label className="w-1/3 text-lg font-semibold">Photo URL:</label>
                   <input
                     type="url"
-                    className="w-2/3 p-2 border rounded"
+                    className="photo w-2/3 p-2 border rounded"
                     value={photo}
                     onChange={(e) => setPhoto(e.target.value)}
                     required

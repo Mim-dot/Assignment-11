@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { motion } from "framer-motion";
 
 const Featured = () => {
@@ -8,7 +8,7 @@ const Featured = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:9000/featured")
+    fetch("https://assi11-mim-dots-projects.vercel.app/featured")
       .then((res) => res.json())
       .then((data) => {
         setTasks(data);

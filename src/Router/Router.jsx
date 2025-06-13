@@ -80,7 +80,7 @@ export const router = createBrowserRouter([
         ) ,
         // loader: myArticlesLoader(),
         // loader: ({ params }) =>
-        //   fetch(`http://localhost:9000/myarticles/${params.id}`),
+        //   fetch(`https://assi11-mim-dots-projects.vercel.app/myarticles/${params.id}`),
       },
 // routes
 
@@ -107,13 +107,13 @@ export const router = createBrowserRouter([
         path: "/singleArtical/:id", 
         element:<Privet> <SingleArtical/></Privet>  ,
        loader: ({ params }) =>
-  fetch(`http://localhost:9000/articles/${params.id}`)
+  fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${params.id}`)
 
       },
       {
         path: "/update/:id", 
         element:<Privet> <Update /></Privet>,
-          loader: ({ params }) => fetch(`http://localhost:9000/articles/${params.id}`),
+          loader: ({ params }) => fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${params.id}`),
       },
       {
         path: "/about", 

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
 import { AuthContext } from "../Provider/AuthProvider";

@@ -15,8 +15,8 @@ const myArticlesLoader = async ({ params }) => {
   try {
     const user = await waitForAuth(); 
     const token = await user.getIdToken();
-// fetch(`http://localhost:9000/myarticals/${params.id}`
-    const res = await fetch(`http://localhost:9000/myarticles/${params.id}`, {
+// fetch(`https://assi11-mim-dots-projects.vercel.app/myarticals/${params.id}`
+    const res = await fetch(`https://assi11-mim-dots-projects.vercel.app/myarticles/${params.id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

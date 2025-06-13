@@ -16,7 +16,7 @@ const PostArticle = () => {
     const articleData = Object.fromEntries(formData.entries());
     articleData.uid = user.uid;
 
-    fetch("http://localhost:9000/articles", {
+    fetch("https://assi11-mim-dots-projects.vercel.app/articles", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(articleData),

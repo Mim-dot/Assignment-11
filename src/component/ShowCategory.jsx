@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
 const ShowCategory = () => {
@@ -13,7 +13,7 @@ useEffect(() => {
     setLoading(true);
     axios
       .get(
-        `http://localhost:9000/articles?sort=${sortOrder}`
+        `https://assi11-mim-dots-projects.vercel.app/articles?sort=${sortOrder}`
       )
       .then((res) => {
         setData(res.data);

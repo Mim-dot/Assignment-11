@@ -22,7 +22,7 @@ const Update = () => {
     const updateArticle = Object.fromEntries(formData.entries());
     updateArticle.uid = user.uid;
 
-    fetch(`http://localhost:9000/articles/${data?._id}`, {
+    fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${data?._id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updateArticle),

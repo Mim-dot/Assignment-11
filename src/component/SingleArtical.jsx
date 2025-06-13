@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom"; 
+import { useLoaderData } from "react-router"; 
 import { useState, useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 
@@ -20,7 +20,7 @@ export default function SingleArtical() {
       comment: commentInput,
     };
 
-    const res = await fetch(`http://localhost:9000/articles/${article._id}/comment`, {
+    const res = await fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${article._id}/comment`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newComment),
@@ -36,7 +36,7 @@ export default function SingleArtical() {
     const updatedLikes = likes + 1;
     setLikes(updatedLikes);
 
-    await fetch(`http://localhost:9000/articles/${article._id}/like`, {
+    await fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${article._id}/like`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ likes: updatedLikes }),
