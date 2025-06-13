@@ -112,8 +112,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "/update/:id", 
-        element:<Privet> <Update /></Privet>,
-          loader: ({ params }) => fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${params.id}`),
+        element:<Privet> <Update /> </Privet>,
+          // loader: ({ params }) => fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${params.id}`),
       },
       {
         path: "/about", 

@@ -1,40 +1,98 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../Provider/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useParams } from "react-router";
 import { motion } from "framer-motion";
 import formlotti from "../assets/Lotties/Form.json";
 import Lottie from "lottie-react";
+import axios from "axios";
+import { useState } from "react";
+import { getAuth } from "firebase/auth";
 
 const Update = () => {
+  const [data ,setData]=useState({})
   document.title = "Update Article";
-
-  const data = useLoaderData();
+  //const data = useLoaderData();
+  const {id}=useParams() 
   const { user } = useContext(AuthContext);
+  useEffect(()=>{
+   axios.get(`https://assi11-mim-dots-projects.vercel.app/articles/${id}`,
+  {
+     headers: {
+        Authorization: `Bearer ${user.accessToken}`,
 
+      },
+  }
+   ) 
+   .then(res=>{
+    console.log(res.data);
+    setData(res.data)
+   })
+   .catch(error=>{
+    console.log(error);
+   })
+
+  },[user.accessToken, id])
   const notify = () => toast.success("Article updated successfully!");
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const updateArticle = Object.fromEntries(formData.entries());
-    updateArticle.uid = user.uid;
+//   const handleUpdate = (e) => {
+//     e.preventDefault();
+//     const form = e.target;
+//     const formData = new FormData(form);
+//     const updateArticle = Object.fromEntries(formData.entries());
+//     updateArticle.uid = user.uid;
 
-    fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${data?._id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(updateArticle),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        notify();
-        form.reset();
-      });
-  };
+//  axios
+//       .put(`https://assi11-mim-dots-projects.vercel.app/articles/${data?._id}`, updateArticle, {
+//         headers: {
+//           Authorization: `Bearer ${user.accessToken}`,
+//         },
+//       })
+//       .then((res) => {
+//         if (res.data) {
+//           toast.success(' updated successfully');
+//           //navigate("");
+//         } else {
+//           toast.info("No changes made.");
+//         }
+//       })
+//       .catch((error) => {
+//         toast.error(error.response?.data?.message || "Update failed");
+//       });
+//   };
 
- 
+ const handleUpdate = async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+  const updateArticle = Object.fromEntries(formData.entries());
+  updateArticle.uid = user.uid;
+
+  try {
+    const auth = getAuth();
+    const token = await auth.currentUser?.getIdToken(true); 
+
+    const res = await axios.put(
+      `https://assi11-mim-dots-projects.vercel.app/articles/${data?._id}`,
+      updateArticle,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (res.data.result?.modifiedCount) {
+      toast.success("Article updated successfully!");
+    } else {
+      toast.info("No changes made.");
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.message || "Update failed");
+    console.error("Update error:", error);
+  }
+};
   const formVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
