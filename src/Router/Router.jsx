@@ -13,44 +13,20 @@ import Abouts from "../component/Abouts";
 import SingleArtical from "../component/SingleArtical";
 import Privet from "../Provider/Privet";
 import Update from "../component/Update";
-import CategoriesList from '../component/CategoriesList';
+import CategoriesList from "../component/CategoriesList";
 import MyArticles from "../component/MyArticles";
 import { getAuth } from "firebase/auth";
 // import myArticlesLoader from "../component/myArticlesLoader";
 export const router = createBrowserRouter([
   {
     path: "/",
- Component : Mainlayout,
+    Component: Mainlayout,
     errorElement: <Error />,
     hydrateFallbackElement: (
-      <div className="flex items-center justify-center w-full h-screen space-x-2 text-4xl animate-pulse">
-        <span
-          role="img"
-          aria-label="sparkle"
-          className="animate-bounce delay-0"
-        >
-          ✨
-        </span>
-        <span role="img" aria-label="star" className="animate-bounce delay-100">
-          🌟
-        </span>
-        <span
-          role="img"
-          aria-label="sparkle"
-          className="animate-bounce delay-200"
-        >
-          ✨
-        </span>
-        <span role="img" aria-label="star" className="animate-bounce delay-300">
-          🌟
-        </span>
-        <span
-          role="img"
-          aria-label="sparkle"
-          className="animate-bounce delay-500"
-        >
-          ✨
-        </span>
+      <div>
+        <span className="loading loading-spinner loading-xs"></span>
+        <span className="loading loading-spinner loading-sm"></span>
+        <span className="loading loading-spinner loading-md"></span>
       </div>
     ),
 
@@ -60,63 +36,72 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/profile", 
+        path: "/profile",
         element: <Profile />,
       },
-      
 
-       {
-        path: "/post", 
-         element:(
-  <Privet><PostArticle /></Privet>
-          
-        ) ,
+      {
+        path: "/post",
+        element: (
+          <Privet>
+            <PostArticle />
+          </Privet>
+        ),
       },
       {
         path: "/myarticles/:email",
-        element:(
-  <Privet><MyArticals/></Privet>
-          
-        ) ,
+        element: (
+          <Privet>
+            <MyArticals />
+          </Privet>
+        ),
         // loader: myArticlesLoader(),
         // loader: ({ params }) =>
         //   fetch(`https://assi11-mim-dots-projects.vercel.app/myarticles/${params.id}`),
       },
-// routes
+      // routes
 
-// {
-//   path: "/myarticles/:id",
-//   element: <Privet><MyArticals/></Privet>,
-//   loader: myArticlesLoader,
-  
-// },
+      // {
+      //   path: "/myarticles/:id",
+      //   element: <Privet><MyArticals/></Privet>,
+      //   loader: myArticlesLoader,
 
+      // },
 
       {
-        path: "/all", 
+        path: "/all",
         element: <AllArticles />,
-        
       },
       {
-        path: "/articles/:Science", 
-        element:  <CategoriesList/>,
-       
+        path: "/articles/:Science",
+        element: <CategoriesList />,
       },
-      
-      {
-        path: "/singleArtical/:id", 
-        element:<Privet> <SingleArtical/></Privet>  ,
-       loader: ({ params }) =>
-  fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${params.id}`)
 
+      {
+        path: "/singleArtical/:id",
+        element: (
+          <Privet>
+            {" "}
+            <SingleArtical />
+          </Privet>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://assi11-mim-dots-projects.vercel.app/articles/${params.id}`
+          ),
       },
       {
-        path: "/update/:id", 
-        element:<Privet> <Update /> </Privet>,
-          // loader: ({ params }) => fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${params.id}`),
+        path: "/update/:id",
+        element: (
+          <Privet>
+            {" "}
+            <Update />{" "}
+          </Privet>
+        ),
+        // loader: ({ params }) => fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${params.id}`),
       },
       {
-        path: "/about", 
+        path: "/about",
         element: <Abouts />,
       },
       {
@@ -127,7 +112,6 @@ export const router = createBrowserRouter([
         path: "/auth/register",
         element: <Register />,
       },
-     
     ],
   },
 ]);

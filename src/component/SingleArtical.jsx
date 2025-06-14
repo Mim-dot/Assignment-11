@@ -18,6 +18,7 @@ export default function SingleArtical() {
       user_name: user.displayName,
       user_photo: user.photoURL,
       comment: commentInput,
+     
     };
 
     const res = await fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${article._id}/comment`, {

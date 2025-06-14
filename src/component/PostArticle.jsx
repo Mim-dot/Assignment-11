@@ -123,7 +123,7 @@ const PostArticle = () => {
                   </td>
                 </tr>
 
-                <tr className="border-b dark:border-gray-600">
+                <tr className="border-b ">
                   <th scope="row" className="py-3 pr-4 font-semibold">
                     Deadline
                   </th>

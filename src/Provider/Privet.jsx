@@ -9,8 +9,10 @@ const Privet = ({children}) => {
  const location = useLocation();
  //console.log(location);
   if (loading) {
-    return<div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600"></div>
-  }
+   return <div><span className="loading loading-spinner loading-xs"></span>
+    <span className="loading loading-spinner loading-sm"></span>
+    <span className="loading loading-spinner loading-md"></span>
+   </div>   }
     if (user ) {
          return children;
     }
