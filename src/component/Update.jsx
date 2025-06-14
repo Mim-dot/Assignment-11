@@ -82,15 +82,15 @@ const Update = () => {
         },
       }
     );
-
-    if (res.data.result?.modifiedCount) {
+    console.log(res.data.result.modifiedCount);
+    if (res.data.result.modifiedCount==1) {
       toast.success("Article updated successfully!");
-      navigate(`/myarticles/${data.email}`);
+      //navigate(`/myarticles/${data.email}`);
     } else {
       toast.info("No changes made.");
     }
   } catch (error) {
-    toast.error(error.response?.data?.message || "Update failed");
+    toast.error( "Update failed");
     console.error("Update error:", error);
   }
 };
