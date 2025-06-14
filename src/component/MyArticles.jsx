@@ -4,6 +4,7 @@ import { useTypewriter } from 'react-simple-typewriter';
 import Swal from "sweetalert2";
 import { useAuth } from '../Provider/AuthProvider';
 import axios from 'axios';
+const [loading, setLoading] = useState(true);
 
 const MyArticles = () => {
   const { user } = useAuth();
@@ -26,6 +27,7 @@ const MyArticles = () => {
       .then((res) => {
         
         setArticles(res.data);
+        setLoading(false)
       })
       .catch((error) => {
         console.error("Error fetching articles:", error);
@@ -57,9 +59,18 @@ const MyArticles = () => {
       }
     });
   };
-
+if (!loading) {
+  return <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600">
+    <span className="loading loading-ring loading-xs"></span>
+<span className="loading loading-ring loading-sm"></span>
+<span className="loading loading-ring loading-md"></span>
+<span className="loading loading-ring loading-lg"></span>
+<span className="loading loading-ring loading-xl"></span>
+  </div>
+}
   return (
-    <div className="mt-8 max-w-7xl mx-auto px-4 py-8 mt-2">
+    
+    <div className="mt-8 max-w-7xl mx-auto px-4 py-8 ">
       {articles.length === 0 ? (
         <div className="text-center text-2xl sm:text-3xl font-semibold text-purple-600 mb-10">
           <span>{text}</span>
