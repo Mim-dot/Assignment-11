@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 const MyArticles = () => {
-  const [loading, setLoading] = useState(true);
+ // const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const [articles, setArticles] = useState([]);
   const { email } = useParams();
@@ -28,7 +28,7 @@ const MyArticles = () => {
       .then((res) => {
         
         setArticles(res.data);
-        setLoading(false)
+        //setLoading(false)
       })
       .catch((error) => {
         console.error("Error fetching articles:", error);
@@ -60,15 +60,15 @@ const MyArticles = () => {
       }
     });
   };
-if (!loading) {
-  return <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600">
-    <span className="loading loading-ring loading-xs"></span>
-<span className="loading loading-ring loading-sm"></span>
-<span className="loading loading-ring loading-md"></span>
-<span className="loading loading-ring loading-lg"></span>
-<span className="loading loading-ring loading-xl"></span>
-  </div>
-}
+// if (!loading) {
+//   return <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600">
+//     <span className="loading loading-ring loading-xs"></span>
+// <span className="loading loading-ring loading-sm"></span>
+// <span className="loading loading-ring loading-md"></span>
+// <span className="loading loading-ring loading-lg"></span>
+// <span className="loading loading-ring loading-xl"></span>
+//   </div>
+// }
   return (
     
     <div className="mt-8 max-w-7xl mx-auto px-4 py-8 ">
