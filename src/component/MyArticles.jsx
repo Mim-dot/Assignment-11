@@ -59,7 +59,7 @@ const MyArticles = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 mt-2">
+    <div className="mt-8 max-w-7xl mx-auto px-4 py-8 mt-2">
       {articles.length === 0 ? (
         <div className="text-center text-2xl sm:text-3xl font-semibold text-purple-600 mb-10">
           <span>{text}</span>

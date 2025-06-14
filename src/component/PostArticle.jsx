@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../Provider/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { getAuth } from "firebase/auth";
 
 const PostArticle = () => {
   document.title = "AddTask";
@@ -9,23 +11,36 @@ const PostArticle = () => {
 
   const notify = () => toast.success("Article added successfully!");
 
-  const handleAddTask = (e) => {
+  const handleAddTask = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const articleData = Object.fromEntries(formData.entries());
     articleData.uid = user.uid;
 
-    fetch("https://assi11-mim-dots-projects.vercel.app/articles", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(articleData),
-    })
-      .then((res) => res.json())
-      .then(() => {
+   try {
+     const auth = getAuth();
+         const token = await auth.currentUser?.getIdToken(true); 
+
+      const response = await axios.post(
+        "https://assi11-mim-dots-projects.vercel.app/articles",
+        articleData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, 
+          },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
         notify();
         form.reset();
-      });
+      }
+    } catch (error) {
+      console.error("Failed to post article:", error);
+      toast.error("Failed to submit article. Please try again.");
+    }
   };
 
   return (
@@ -173,7 +188,7 @@ const PostArticle = () => {
           <div className="mt-6 text-center">
             <button
               type="submit"
-              className="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
+              className=" cursor-pointer px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
             >
               Submit Article
             </button>

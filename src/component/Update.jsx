@@ -85,6 +85,7 @@ const Update = () => {
 
     if (res.data.result?.modifiedCount) {
       toast.success("Article updated successfully!");
+      navigate(`/myarticles/${data.email}`);
     } else {
       toast.info("No changes made.");
     }
@@ -267,7 +268,7 @@ const Update = () => {
               <div className="pt-4">
                 <motion.button
                   type="submit"
-                  className="w-full py-3 px-6 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium rounded-lg shadow-md transition-all duration-200"
+                  className=" cursor-pointer w-full py-3 px-6 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium rounded-lg shadow-md transition-all duration-200"
                   whileHover="hover"
                   whileTap="tap"
                   variants={buttonVariants}

@@ -80,10 +80,10 @@ export default function SingleArtical() {
         <p className="text-lg leading-relaxed">{article.content}</p>
         {/* Like */}
  <div className="flex justify-between mt-6">
-          <button onClick={handleLike} className="px-4 py-2 bg-pink-600 text-white rounded-full hover:scale-105 transition">
+          <button onClick={handleLike} className="px-4 py-2 bg-pink-600 text-white rounded-full hover:scale-105 cursor-pointer transition">
             ❤️ Like ({likes})
           </button>
-          <span className="text-gray-600 com">{comments.length} Comments</span>
+          <span className="text-gray-600 com ">{comments.length} Comments</span>
         </div>
       </div>
     </div>
@@ -99,7 +99,7 @@ export default function SingleArtical() {
             onChange={(e) => setCommentInput(e.target.value)}
             placeholder="Write a comment..."
           />
-          <button onClick={handleCommentSubmit} className="bg-indigo-600 text-white px-4 py-2 rounded-md">
+          <button onClick={handleCommentSubmit} className="bg-indigo-600 text-white px-4 py-2 rounded-md  cursor-pointer">
             Post
           </button>
         </div>

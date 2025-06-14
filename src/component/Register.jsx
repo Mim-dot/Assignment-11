@@ -41,8 +41,9 @@ const Register = () => {
 
         updateUser({ displayName: name, photoURL: photo }).then(() => {
           setUser({ ...user, displayName: name, photoURL: photo });
-          toast.success("Registered successfully!");
+         
           navigate("/");
+         toast.success("Registered successfully!");
         });
       })
       .catch((err) => toast.error(err.message));
@@ -60,7 +61,7 @@ const Register = () => {
 
   return (
     <motion.div
-      className="relative min-h-screen overflow-hidden bg-white dark:bg-black"
+      className="reg relative min-h-screen overflow-hidden bg-white dark:bg-black"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -69,18 +70,18 @@ const Register = () => {
       <div className="absolute inset-0">
         <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600 opacity-30 rounded-full blur-3xl animate-spin-slow" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-yellow-400 via-orange-500 to-red-500 opacity-20 rounded-full blur-2xl animate-pulse" />
-        <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-transparent to-white/70 dark:from-black/70 dark:to-black/70" />
+        <div className=" absolute inset-0 bg-gradient-to-br from-white/70 via-transparent to-white/70 dark:from-black/70 dark:to-black/70" />
       </div>
 
       {/* Main Form Section */}
-      <div className="relative z-10 grid md:grid-cols-2 items-center min-h-screen px-8 py-12">
+      <div className=" relative z-10 grid md:grid-cols-2 items-center min-h-screen px-8 py-12">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-          className="text-center md:text-left text-black dark:text-white"
+          className="sm:my-6 text-center md:text-left text-black dark:text-white"
         >
-          <h1 className="text-4xl font-bold mb-3">Join Lilo</h1>
+          <h1 className=" text-4xl font-bold mb-3">Join Lilo</h1>
           <p className="text-lg text-gray-700 dark:text-gray-300 max-w-sm mx-auto md:mx-0">
             Create your account to connect with Knowledge Sharing Platform.
           </p>
@@ -90,7 +91,7 @@ const Register = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="w-full max-w-md mx-auto backdrop-blur-md bg-white/10 dark:bg-black/10 border border-white/30 rounded-xl p-8 text-black dark:text-white"
+          className="w-full mt-8 max-w-md mx-auto backdrop-blur-md  bg-white/10 border border-white/30 rounded-xl p-8 text-black dark:text-white"
         >
           <form onSubmit={handleRegister} className="space-y-5">
             <motion.h2
@@ -126,7 +127,7 @@ const Register = () => {
               type="submit"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
+              className="w-full py-2 cursor-pointer bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
             >
               Register
             </motion.button>
@@ -137,13 +138,13 @@ const Register = () => {
               whileTap={{ scale: 0.95 }}
             >
               <FcGoogle size={20} />
-              <button type="button" onClick={handleGoogleLogin} className="text-sm dark:text-white">
+              <button type="button" onClick={handleGoogleLogin} className="text-sm cursor-pointer dark:text-white">
                 Register with Google
               </button>
             </motion.div>
 
             <motion.p
-              className="text-center text-sm mt-3 text-gray-700 dark:text-gray-300"
+              className="motion-p text-center text-sm mt-3 text-gray-700 dark:text-gray-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9 }}

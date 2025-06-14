@@ -237,3 +237,22 @@ color: #f36e39;
 .dark .about-p{
   color: #c4c7cc;
 }
+.login {
+  background: linear-gradient(to bottom left, #baebbe, white);
+}
+
+.dark .login {
+  background: linear-gradient(to bottom left, #444644, rgb(8, 8, 8));
+}
+.dark .login-p{
+  color: white;
+}
+.dark .reg{
+  background-color: #000000;
+}
+.dark .motion-p{
+  color: #000000;
+}
+.dark .input-style{
+  color: white;
+}

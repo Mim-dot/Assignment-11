@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-bl from-[#baebbe] to-white text-black ">
+    <div className="login relative min-h-screen overflow-hidden bg-gradient-to-bl from-[#baebbe] to-white text-black ">
      
       <div className="absolute inset-0 z-0 bg-animated-grid">
         <div className="absolute top-[-20%] left-[-15%] w-[600px] h-[600px] bg-gradient-to-br from-purple-600 via-blue-500 to-pink-500 opacity-20 rounded-full blur-3xl animate-float"></div>
@@ -60,11 +60,11 @@ const Login = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-4xl text-amber-600 font-bold mb-4"
+            className="sm:my-6 text-4xl text-amber-600 font-bold mb-4"
           >
             Welcome to Lilo
           </motion.h1>
-          <p className="text-lg text-black max-w-sm mx-auto md:mx-0">
+          <p className="login-p text-lg text-black max-w-sm mx-auto md:mx-0">
             Connect with freelancers. Get your tasks done quickly & easily. Log in to get started.
           </p>
         </motion.div>
@@ -74,7 +74,7 @@ const Login = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full max-w-md mx-auto backdrop-blur-md bg-[#0f0c29] rounded-xl p-8 text-white"
+          className="mt-8 w-full max-w-md mx-auto backdrop-blur-md bg-[#0f0c29] rounded-xl p-8 text-white"
         >
           <form onSubmit={handleLogin} className="space-y-5">
             <h2 className="text-2xl font-semibold text-center">Login</h2>
@@ -106,7 +106,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={handleForgotPasswordClick}
-                className="text-orange-300 hover:underline"
+                className="text-orange-300 cursor-pointer hover:underline"
               >
                 Forgot password?
               </button>
@@ -115,7 +115,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md"
+              className="w-full py-2 cursor-pointer bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md"
             >
               Login
             </button>
@@ -125,7 +125,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={handleGoogle}
-                className="text-sm font-medium text-white"
+                className=" cursor-pointer text-sm font-medium text-white"
               >
                 Login with Google
               </button>
