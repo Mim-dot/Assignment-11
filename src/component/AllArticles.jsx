@@ -115,9 +115,9 @@ if (loading) {
                   <div className="text-sm text-gray-500 all-ty mb-2 mt-3" ><span>{new Date(article.deadline).toDateString()}</span></div>
                   </div>
 
-                  <div className="prose max-w-none line-clamp-4">
+                  {/* <div className="prose max-w-none line-clamp-4">
                     {parse(article.content || "")}
-                  </div>
+                  </div> */}
 
                   <div className="mt-6 text-right">
                     <Link

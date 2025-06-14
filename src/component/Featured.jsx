@@ -59,10 +59,10 @@ const Featured = () => {
 
               {/* Category */}
               <p className="feature-p text-xs uppercase font-semibold text-purple-600 dark:text-purple-300 mb-1 tracking-wide">
-                Category
+                Author Name
               </p>
               <p className="feature-pp text-md text-gray-800 dark:text-gray-200 mb-4 font-medium">
-                {task.category}
+                {task.username}
               </p>
 
               {/* Description */}

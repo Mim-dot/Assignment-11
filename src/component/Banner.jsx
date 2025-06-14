@@ -39,7 +39,7 @@ const Banner = () => {
             to="/all"
             className="bg-gradient-to-r from-pink-400 to-purple-400 text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
           >
-            💖 All Articles 💖
+            💖 Explore Articles 💖
           </NavLink>
         </div>
       </div>

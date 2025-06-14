@@ -2,7 +2,7 @@
 
 **Lilo** is a collaborative platform where students can post articles, share knowledge, and engage in meaningful discussions. Built with the **MERN stack** and **Firebase Authentication**, Lilo offers a secure and responsive environment for idea exchange and academic collaboration.
 
-🔗 **Live Site**: [https://lilo-platform.vercel.app]
+🔗 **Live Site**: [ https://assi-11.web.app]
 
 ---
 

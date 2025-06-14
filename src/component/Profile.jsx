@@ -45,14 +45,12 @@ const Profile = () => {
       try {
         const res = await fetch("http://localhost:9000/articles");
         const data = await res.json();
-          
+
         const userEmail = user?.email?.trim().toLowerCase();
         const userComments = [];
-         
+
         (Array.isArray(data) ? data : []).forEach((article) => {
           (article.comments || []).forEach((comment) => {
-            console.log("article.comments",article.comments);
-               //console.log("comments",comments);
             if (comment?.user_email?.trim()?.toLowerCase() === userEmail) {
               userComments.push({
                 _id: comment._id || `${article._id}-${Math.random()}`,
@@ -62,12 +60,12 @@ const Profile = () => {
                 user_name: comment.user_name,
                 user_photo: comment.user_photo,
                 date: comment.date,
-                user_email: comment.user_email, 
+                user_email: comment.user_email, // ✅ fixed this line
               });
             }
           });
         });
-console.log(userComments);
+
         setComments(userComments);
       } catch (err) {
         console.error("Failed to fetch comments", err);
@@ -112,7 +110,7 @@ console.log(userComments);
   return (
     <div className="profile flex justify-center items-center p-4 min-h-screen mt-5">
       {user ? (
-        <div className="profile-2 mt-12 w-full max-w-4xl bg-white shadow-lg rounded-lg p-6">
+        <div className="profile-2 mt-10 w-full max-w-4xl bg-white shadow-lg rounded-lg p-6">
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
             <div className="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring-2 ring-offset-2 overflow-hidden">
               <img
