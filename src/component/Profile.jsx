@@ -29,7 +29,7 @@ const Profile = () => {
         const token = await user.getIdToken();
 
         const articlesRes = await fetch(
-          `http://localhost:9000/myarticles?email=${encodeURIComponent(user.email)}`,
+          `https://assi11-mim-dots-projects.vercel.app/myarticles?email=${encodeURIComponent(user.email)}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ const Profile = () => {
       }
 
       try {
-        const res = await fetch("http://localhost:9000/articles");
+        const res = await fetch("https://assi11-mim-dots-projects.vercel.app/articles");
         const data = await res.json();
 
         const userEmail = user?.email?.trim().toLowerCase();
