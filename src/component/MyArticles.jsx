@@ -4,9 +4,10 @@ import { useTypewriter } from 'react-simple-typewriter';
 import Swal from "sweetalert2";
 import { useAuth } from '../Provider/AuthProvider';
 import axios from 'axios';
-const [loading, setLoading] = useState(true);
+
 
 const MyArticles = () => {
+  const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const [articles, setArticles] = useState([]);
   const { email } = useParams();
