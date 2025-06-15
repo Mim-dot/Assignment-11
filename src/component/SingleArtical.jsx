@@ -120,9 +120,7 @@ export default function SingleArtical() {
           >
             ❤️ Like ({likes})
           </button>
-          <span className="text-gray-600 com">
-            {comments.length} Comments
-          </span>
+          <span className="text-gray-600 com">{comments.length} Comments</span>
         </div>
       </div>
 

@@ -20,26 +20,21 @@ const AllArticles = () => {
   });
 
   useEffect(() => {
-    if (!user) return;
     setLoading(true);
     axios
       .get(
-        `https://assi11-mim-dots-projects.vercel.app/articles?sort=${sortOrder}`,
-        {
-          headers: {
-            Authorization: `Bearer ${user.accessToken}`,
-          },
-        }
+        `https://assi11-mim-dots-projects.vercel.app/articles?sort=${sortOrder}`
       )
       .then((res) => {
         setData(res.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Failed tofetch marathons:", err);
+        console.error("Failed to fetch articles:", err);
         setLoading(false);
       });
-  }, [user, sortOrder]);
+  }, [sortOrder]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -53,7 +48,7 @@ const AllArticles = () => {
       </div>
     );
   }
-  //console.log(sortOrder);
+
   return (
     <div
       className="all-artical mt-17 mb-2 max-w-7xl mx-auto px-4 py-8 "

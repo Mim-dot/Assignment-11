@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import "../index.css"
 const Nav = () => {
-
+ 
   const [isDark, setIsDark] = useState(
     () => localStorage.getItem("theme") === "dark"
   );
@@ -22,8 +22,9 @@ const Nav = () => {
       localStorage.setItem("theme", "light");
     }
   }, [isDark]);
-
+      
   const { user, logOut } = useContext(AuthContext);
+  
   //console.log(user);
   const handleLogOut = () => {
     logOut()

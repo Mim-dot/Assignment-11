@@ -46,8 +46,10 @@ const Featured = () => {
               aria-hidden="true"
             />
 
-            <Link to={`/singleArtical/${task._id}`} className="block no-underline">
-            
+            <Link
+              to={`/singleArtical/${task._id}`}
+              className="block no-underline"
+            >
               <div className="absolute top-0 right-0 bg-pink-600 text-white font-bold text-xs px-3 py-1 rounded-bl-xl rotate-6 shadow-md pointer-events-none select-none">
                 ❤️ {task.likes}
               </div>
@@ -73,7 +75,6 @@ const Featured = () => {
                 {task.content}
               </p>
 
-
               <p className="feature-p text-sm font-semibold text-indigo-600 dark:text-indigo-300">
                 Deadline:{" "}
                 <time dateTime={task.deadline} className="italic">
@@ -85,12 +86,13 @@ const Featured = () => {
                 </time>
               </p>
 
-             
               <div className="absolute bottom-4 right-4 flex gap-1 pointer-events-none">
                 {[...Array(4)].map((_, i) => (
                   <span
                     key={i}
-                    className={`w-2 h-2 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-${50 - i * 10}`}
+                    className={`w-2 h-2 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-${
+                      50 - i * 10
+                    }`}
                   />
                 ))}
               </div>

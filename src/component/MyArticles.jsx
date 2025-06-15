@@ -30,7 +30,6 @@ const MyArticles = () => {
       .then((res) => {
         setArticles(res.data);
         setLoading(false);
-        
       })
       .catch((error) => {
         console.error("Error fetching articles:", error);

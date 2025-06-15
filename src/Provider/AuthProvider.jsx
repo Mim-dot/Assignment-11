@@ -56,7 +56,6 @@ const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         toast.success("Google login successful!");
-       
       })
       .catch((error) => {
        
@@ -65,6 +64,7 @@ const googleProvider = new GoogleAuthProvider();
   };
   
   const logOut=()=>{
+    setLoading(true)
     return signOut(auth)
   }
   useEffect(() => {
