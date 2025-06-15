@@ -85,10 +85,10 @@ export const router = createBrowserRouter([
             <SingleArtical />
           </Privet>
         ),
-        loader: ({ params }) =>
-          fetch(
-            `https://assi11-mim-dots-projects.vercel.app/articles/${params.id}`
-          ),
+        // loader: ({ params }) =>
+        //   fetch(
+        //     `https://assi11-mim-dots-projects.vercel.app/articles/${params.id}`
+        //   ),
       },
       {
         path: "/update/:id",
