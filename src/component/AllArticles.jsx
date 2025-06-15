@@ -2,28 +2,32 @@ import React from "react";
 import { Link, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
-import "../index.css"
+import "../index.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import { useTypewriter } from 'react-simple-typewriter';
+import { useTypewriter } from "react-simple-typewriter";
+import { useAuth } from "../Provider/AuthProvider";
 const AllArticles = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   // const data = useLoaderData();
-  
-const [sortOrder, setSortOrder] = useState("");
-const [text] = useTypewriter({
+  const { user } = useAuth();
+  const [sortOrder, setSortOrder] = useState("");
+  const [text] = useTypewriter({
     words: ["NO Data Found"],
     loop: 0,
   });
 
-useEffect(() => {
+  useEffect(() => {
+  if (!user) return;
     setLoading(true);
     axios
-      .get(
-        `https://assi11-mim-dots-projects.vercel.app/articles?sort=${sortOrder}`
-      )
+      .get(`http://localhost:9000/articles?sort=${sortOrder}`, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      })
       .then((res) => {
         setData(res.data);
         setLoading(false);
@@ -32,19 +36,21 @@ useEffect(() => {
         console.error("Failed tofetch marathons:", err);
         setLoading(false);
       });
-  }, [sortOrder])
-if (loading) {
-  return <div className="min-h-screen flex justify-center items-center">
-      <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600 flex justify-center items-center gap-1">
-        <span className="loading loading-ring loading-xs"></span>
-        <span className="loading loading-ring loading-sm"></span>
-        <span className="loading loading-ring loading-md"></span>
-        <span className="loading loading-ring loading-lg"></span>
-        <span className="loading loading-ring loading-xl"></span>
+  }, [user,sortOrder ]);
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600 flex justify-center items-center gap-1">
+          <span className="loading loading-ring loading-xs"></span>
+          <span className="loading loading-ring loading-sm"></span>
+          <span className="loading loading-ring loading-md"></span>
+          <span className="loading loading-ring loading-lg"></span>
+          <span className="loading loading-ring loading-xl"></span>
+        </div>
       </div>
-    </div>
-}
-//console.log(sortOrder);
+    );
+  }
+  //console.log(sortOrder);
   return (
     <div
       className="all-artical mt-17 mb-2 max-w-7xl mx-auto px-4 py-8 "
@@ -61,32 +67,27 @@ if (loading) {
 
       <div className=" ">
         {data.length === 0 ? (
-           <div className="text-center text-2xl sm:text-3xl font-semibold text-purple-600 mb-10">
-          <span>{text}</span>
-          <div className="flex justify-center items-center mt-4">
-           
+          <div className="text-center text-2xl sm:text-3xl font-semibold text-purple-600 mb-10">
+            <span>{text}</span>
+            <div className="flex justify-center items-center mt-4"></div>
           </div>
-        </div>
         ) : (
           <>
-
             <h1 className="text-3xl font-bold text-center text-primary mb-10">
-               All Articles
+              All Articles
             </h1>
- <div className="mb-6 text-right">
-        <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)} 
-          className="all-drop border border-blue-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">All Articles</option>
-          <option  value="Science">Science</option>
-           <option value="Arts">Arts </option>
-          <option value="Technology">Technology</option>
-        </select>
-     
-
-      </div>
+            <div className="mb-6 text-right">
+              <select
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                className="all-drop border border-blue-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">All Articles</option>
+                <option value="Science">Science</option>
+                <option value="Arts">Arts </option>
+                <option value="Technology">Technology</option>
+              </select>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-4  grid-rows-2 gap-10">
               {data.map((article, index) => (
                 <motion.div
@@ -112,7 +113,9 @@ if (loading) {
                     <span>
                       By <strong>{article.username}</strong>
                     </span>{" "}
-                  <div className="text-sm text-gray-500 all-ty mb-2 mt-3" ><span>{new Date(article.deadline).toDateString()}</span></div>
+                    <div className="text-sm text-gray-500 all-ty mb-2 mt-3">
+                      <span>{new Date(article.deadline).toDateString()}</span>
+                    </div>
                   </div>
 
                   {/* <div className="prose max-w-none line-clamp-4">
@@ -121,7 +124,7 @@ if (loading) {
 
                   <div className="mt-6 text-right">
                     <Link
-                     to={`/singleArtical/${article?._id}`}
+                      to={`/singleArtical/${article?._id}`}
                       className="inline-block px-5 py-2 rounded-full bg-primary text-white font-semibold hover:bg-primary/80 transition"
                     >
                       Read More →

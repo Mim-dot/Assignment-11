@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router';
-import { useTypewriter } from 'react-simple-typewriter';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router";
+import { useTypewriter } from "react-simple-typewriter";
 import Swal from "sweetalert2";
-import { useAuth } from '../Provider/AuthProvider';
-import axios from 'axios';
-
+import { useAuth } from "../Provider/AuthProvider";
+import axios from "axios";
 
 const MyArticles = () => {
- const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const [articles, setArticles] = useState([]);
   const { email } = useParams();
@@ -18,21 +17,23 @@ const MyArticles = () => {
   });
 
   useEffect(() => {
-    if (!user?.accessToken ) return;
-setLoading(true);
-    axios(`https://assi11-mim-dots-projects.vercel.app/myarticles?email=${user.email}`, {
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    })
+    if (!user?.accessToken) return;
+    setLoading(true);
+    axios(
+      `https://assi11-mim-dots-projects.vercel.app/myarticles?email=${user.email}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    )
       .then((res) => {
-        
         setArticles(res.data);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching articles:", error);
-         setLoading(false);
+        setLoading(false);
       });
   }, [user.accessToken, email]);
 
@@ -47,33 +48,41 @@ setLoading(true);
       confirmButtonText: "Yes, Delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://assi11-mim-dots-projects.vercel.app/articles/${articleId}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://assi11-mim-dots-projects.vercel.app/articles/${articleId}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount) {
               const remaining = articles.filter((a) => a._id !== articleId);
               setArticles(remaining);
-              Swal.fire("Deleted!", "Your article has been deleted.", "success");
+              Swal.fire(
+                "Deleted!",
+                "Your article has been deleted.",
+                "success"
+              );
             }
           });
       }
     });
   };
-if (loading) {
-  return <div className="min-h-screen flex justify-center items-center">
-      <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600 flex justify-center items-center gap-1">
-        <span className="loading loading-ring loading-xs"></span>
-        <span className="loading loading-ring loading-sm"></span>
-        <span className="loading loading-ring loading-md"></span>
-        <span className="loading loading-ring loading-lg"></span>
-        <span className="loading loading-ring loading-xl"></span>
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600 flex justify-center items-center gap-1">
+          <span className="loading loading-ring loading-xs"></span>
+          <span className="loading loading-ring loading-sm"></span>
+          <span className="loading loading-ring loading-md"></span>
+          <span className="loading loading-ring loading-lg"></span>
+          <span className="loading loading-ring loading-xl"></span>
+        </div>
       </div>
-    </div>
-}
+    );
+  }
   return (
-    
     <div className="mt-8 max-w-7xl mx-auto px-4 py-8 ">
       {articles.length === 0 ? (
         <div className="text-center text-2xl sm:text-3xl font-semibold text-purple-600 mb-10">
@@ -98,7 +107,9 @@ if (loading) {
                   <th className="py-3 px-4 text-purple-700">📌 Task</th>
                   <th className="py-3 px-4 text-purple-700">⏰ Deadline</th>
                   <th className="py-3 px-4 text-purple-700">🗂️ Category</th>
-                  <th className="py-3 px-4 text-purple-700 text-center">Actions</th>
+                  <th className="py-3 px-4 text-purple-700 text-center">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -106,10 +117,16 @@ if (loading) {
                   <tr
                     key={task._id}
                     className="hover:bg-purple-50 transition-all duration-300 ease-in-out cursor-pointer"
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.transform = "scale(1.02)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.transform = "scale(1)")
+                    }
                   >
-                    <td className="font-medium text-purple-600 py-3 px-4">{task.title}</td>
+                    <td className="font-medium text-purple-600 py-3 px-4">
+                      {task.title}
+                    </td>
                     <td className="py-3 px-4 text-purple-500">
                       {new Date(task.deadline).toLocaleDateString()}
                     </td>

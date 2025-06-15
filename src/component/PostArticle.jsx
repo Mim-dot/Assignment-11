@@ -18,17 +18,16 @@ const PostArticle = () => {
     const articleData = Object.fromEntries(formData.entries());
     articleData.uid = user.uid;
 
-   try {
-     const auth = getAuth();
-         const token = await auth.currentUser?.getIdToken(true); 
-
+    try {
+      const auth = getAuth();
+      const token = await auth.currentUser?.getIdToken(true);
       const response = await axios.post(
-        "https://assi11-mim-dots-projects.vercel.app/articles",
+        "http://localhost:9000/articles",
         articleData,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -62,7 +61,6 @@ const PostArticle = () => {
                     <input
                       name="title"
                       type="text"
-                      
                       required
                       placeholder="Article Title"
                       className="table-input"
@@ -78,7 +76,6 @@ const PostArticle = () => {
                     <input
                       name="category"
                       type="text"
-                      
                       list="categoryList"
                       placeholder="Select a Category"
                       required
@@ -100,7 +97,6 @@ const PostArticle = () => {
                     <textarea
                       name="content"
                       rows="5"
-                     
                       placeholder="Write your article content"
                       required
                       className="table-input resize-none "
