@@ -14,17 +14,17 @@
 //   const [data ,setData]=useState({})
 //   document.title = "Update Article";
 //   //const data = useLoaderData();
-//   const {id}=useParams() 
+//   const {id}=useParams()
 //   const { user } = useContext(AuthContext);
 //   useEffect(()=>{
-//    axios.get(`http://localhost:9000/articles/${id}`,
+//    axios.get(`https://assi11-mim-dots-projects.vercel.app/articles/${id}`,
 //   {
 //      headers: {
 //         Authorization: `Bearer ${user.accessToken}`,
 
 //       },
 //   }
-//    ) 
+//    )
 //    .then(res=>{
 //     console.log(res.data);
 //     setData(res.data)
@@ -71,10 +71,10 @@
 
 //   try {
 //     const auth = getAuth();
-//     const token = await auth.currentUser?.getIdToken(true); 
+//     const token = await auth.currentUser?.getIdToken(true);
 
 //     const res = await axios.put(
-//       `http://localhost:9000/articles/${data?._id}`,
+//       `https://assi11-mim-dots-projects.vercel.app/articles/${data?._id}`,
 //       updateArticle,
 //       {
 //         headers: {
@@ -118,7 +118,7 @@
 //         animate="visible"
 //       >
 //         <div className="flex  flex-col md:flex-row">
-         
+
 //           <div className="w-full Lottie md:w-1/2 flex items-center justify-center p-8">
 //             <div className="max-w-md w-full">
 //               <Lottie className="" animationData={formlotti} loop={true} />
@@ -131,7 +131,6 @@
 //             </div>
 //           </div>
 
-          
 //           <div className="w-full form md:w-1/2 p-6 sm:p-8">
 //             <h2 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600   mb-6 mt-8">
 //               Update Your Article
@@ -307,11 +306,14 @@ const Update = () => {
 
     const fetchArticle = async () => {
       try {
-        const res = await axios.get(`http://localhost:9000/articles/${id}`, {
-          headers: {
-            Authorization: `Bearer ${user.accessToken}`,
-          },
-        });
+        const res = await axios.get(
+          `https://assi11-mim-dots-projects.vercel.app/articles/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.accessToken}`,
+            },
+          }
+        );
         setData(res.data);
       } catch (error) {
         console.error("Error fetching article:", error);
@@ -336,7 +338,7 @@ const Update = () => {
       const token = await auth.currentUser?.getIdToken(true);
 
       const res = await axios.put(
-        `http://localhost:9000/articles/${data?._id}`,
+        `https://assi11-mim-dots-projects.vercel.app/articles/${data?._id}`,
         updateArticle,
         {
           headers: {
@@ -360,7 +362,11 @@ const Update = () => {
 
   const formVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   };
 
   const buttonVariants = {
@@ -381,7 +387,9 @@ const Update = () => {
             <div className="max-w-md w-full">
               <Lottie animationData={formlotti} loop={true} />
               <div className="text-center mt-6">
-                <h3 className="text-xl font-semibold text-purple-800">Edit with Confidence</h3>
+                <h3 className="text-xl font-semibold text-purple-800">
+                  Edit with Confidence
+                </h3>
                 <p className="text-purple-600 mt-2">
                   Update your article details and make it even better!
                 </p>
@@ -397,7 +405,9 @@ const Update = () => {
             <form onSubmit={handleUpdate} className="space-y-6">
               {/* Title */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Title
+                </label>
                 <input
                   name="title"
                   type="text"
@@ -431,7 +441,9 @@ const Update = () => {
 
               {/* Content */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Content</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Content
+                </label>
                 <textarea
                   name="content"
                   rows="6"
@@ -458,13 +470,17 @@ const Update = () => {
 
               {/* Deadline */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Deadline</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Deadline
+                </label>
                 <input
                   name="deadline"
                   type="date"
                   required
                   defaultValue={
-                    data?.deadline ? new Date(data.deadline).toISOString().split("T")[0] : ""
+                    data?.deadline
+                      ? new Date(data.deadline).toISOString().split("T")[0]
+                      : ""
                   }
                   className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
                 />
@@ -472,7 +488,9 @@ const Update = () => {
 
               {/* Photo URL */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Photo URL</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Photo URL
+                </label>
                 <input
                   name="photo"
                   type="url"
@@ -486,7 +504,9 @@ const Update = () => {
               {/* User Info */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">User Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    User Name
+                  </label>
                   <input
                     name="username"
                     type="text"
@@ -496,7 +516,9 @@ const Update = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">User Email</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    User Email
+                  </label>
                   <input
                     name="email"
                     type="email"

@@ -20,14 +20,17 @@ const AllArticles = () => {
   });
 
   useEffect(() => {
-  if (!user) return;
+    if (!user) return;
     setLoading(true);
     axios
-      .get(`http://localhost:9000/articles?sort=${sortOrder}`, {
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-      })
+      .get(
+        `https://assi11-mim-dots-projects.vercel.app/articles?sort=${sortOrder}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      )
       .then((res) => {
         setData(res.data);
         setLoading(false);
@@ -36,7 +39,7 @@ const AllArticles = () => {
         console.error("Failed tofetch marathons:", err);
         setLoading(false);
       });
-  }, [user,sortOrder ]);
+  }, [user, sortOrder]);
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">

@@ -22,7 +22,7 @@ const PostArticle = () => {
       const auth = getAuth();
       const token = await auth.currentUser?.getIdToken(true);
       const response = await axios.post(
-        "http://localhost:9000/articles",
+        "https://assi11-mim-dots-projects.vercel.app/articles",
         articleData,
         {
           headers: {
