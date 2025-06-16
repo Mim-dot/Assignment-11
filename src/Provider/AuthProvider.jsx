@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import app from "../Firebase/firebase.config";
 
-
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -13,64 +12,59 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-
-
 } from "firebase/auth";
 
 export const AuthContext = createContext(null);
 import { toast } from "react-toastify";
 
 const AuthProvider = ({ children }) => {
-  
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
- 
+  const auth = getAuth(app);
+  const googleProvider = new GoogleAuthProvider();
+
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  const signIn=(email,password)=>{
-    return signInWithEmailAndPassword(auth,email,password)
-  }
+  const signIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
   const updateUser = async (updatedData) => {
     const currentUser = auth.currentUser;
     await updateProfile(currentUser, updatedData);
     await reload(currentUser);
-    setUser(auth.currentUser); 
+    setUser(auth.currentUser);
   };
-  const handleForgetPassword=(email)=>{
+  const handleForgetPassword = (email) => {
     console.log(email);
-   return sendPasswordResetEmail(auth, email)
-    .then(() => {
-      // Password reset email sent!
-      // ..
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-     
-    });
-  }
+    return sendPasswordResetEmail(auth, email)
+      .then(() => {
+        // Password reset email sent!
+        // ..
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
   const handleGoogle = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         toast.success("Google login successful!");
       })
       .catch((error) => {
-       
         toast.error("Google login failed: " + error.message);
       });
   };
-  
-  const logOut=()=>{
-    setLoading(true)
-    return signOut(auth)
-  }
+
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false)
+      setLoading(false);
     });
     return () => {
       unsubscribe();

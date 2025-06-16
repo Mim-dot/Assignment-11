@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import "../index.css"
+import Swal from 'sweetalert2';
 const Nav = () => {
  
   const [isDark, setIsDark] = useState(
@@ -27,11 +28,36 @@ const Nav = () => {
   
   //console.log(user);
   const handleLogOut = () => {
-    logOut()
-      .then(() => {
-        toast.success("Logged out successfully!");
-      })
-      .catch(console.error);
+    Swal.fire({
+    title: "Are you sure?",
+    text: "You will be logged out!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, logout!",
+    confirmButtonColor: "#2563EB",
+    cancelButtonColor: "#6B7280",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      logOut()
+        .then(() => {
+          Swal.fire({
+            title: "Logged out!",
+            text: "You have been logged out successfully.",
+            icon: "success",
+            confirmButtonColor: "#2563EB",
+            timer: 1500,
+          });
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Oops!",
+            text: error.message,
+            icon: "error",
+            confirmButtonColor: "#2563EB",
+          });
+        });
+    }
+  });
   };
 
   const navLinks = (

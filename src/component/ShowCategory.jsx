@@ -26,7 +26,20 @@ const ShowCategory = () => {
         );
         setLoading(false);
       });
-  }, [sortOrder]);
+  }, [category]);
+   if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600 flex justify-center items-center gap-1">
+          <span className="loading loading-ring loading-xs"></span>
+          <span className="loading loading-ring loading-sm"></span>
+          <span className="loading loading-ring loading-md"></span>
+          <span className="loading loading-ring loading-lg"></span>
+          <span className="loading loading-ring loading-xl"></span>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="my-20 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
       {["Science", "Arts", "Technology"].map((category, index) => (
@@ -47,7 +60,7 @@ const ShowCategory = () => {
               : "bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-100 border-zinc-200 dark:border-zinc-700 hover:shadow-2xl"
           }`}
         >
-          {/* Glowing Layer */}
+          
           <motion.div
             className="absolute -inset-1 rounded-[inherit] blur-xl opacity-30 z-[-1] group-hover:opacity-50 transition-all duration-700"
             style={{
@@ -55,7 +68,7 @@ const ShowCategory = () => {
             }}
           />
 
-          {/* Decorative Circles */}
+        
           <div className="absolute top-[-30px] right-[-30px] w-32 h-32 bg-purple-500 opacity-20 rounded-full blur-2xl pointer-events-none" />
           <div className="absolute bottom-[-20px] left-[-20px] w-20 h-20 bg-indigo-400 opacity-20 rounded-full blur-2xl pointer-events-none" />
 
@@ -68,7 +81,7 @@ const ShowCategory = () => {
             articles.
           </p>
 
-          {/* Border Shine on hover */}
+          
           <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-indigo-500 transition-all duration-300 pointer-events-none" />
         </motion.div>
       ))}

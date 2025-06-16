@@ -25,6 +25,19 @@ const CategoryArticles = () => {
         setLoading(false);
       });
   }, [Science]);
+   if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600 flex justify-center items-center gap-1">
+          <span className="loading loading-ring loading-xs"></span>
+          <span className="loading loading-ring loading-sm"></span>
+          <span className="loading loading-ring loading-md"></span>
+          <span className="loading loading-ring loading-lg"></span>
+          <span className="loading loading-ring loading-xl"></span>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="list min-h-[70vh] category bg-gray-50 flex justify-center items-center py-20 px-6">
       <div className="mt-18 max-w-6xl w-full grid grid-cols-1 sm:grid-cols-3 gap-10">

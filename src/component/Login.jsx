@@ -17,14 +17,17 @@ const Login = () => {
   }, []);
 
   const handleLogin = (e) => {
+
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-
     signIn(email, password)
       .then(() => {
-        navigate(location.state ? location.state : "/");
-        toast.success("Login successful!");
+          toast.success("Login successful!");
+       toast.success("Login successful!");
+        const redirectPath = location.state || "/";
+        navigate(redirectPath);
+        
       })
       .catch((error) => setError(error.code));
   };
