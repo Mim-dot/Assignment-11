@@ -124,12 +124,12 @@ const Profile = () => {
               />
             </div>
             <div className="text-center lg:text-left">
-              <div className="font-bold text-[18px] text-gray-700">
-                Email: <span className="text-gray-600">{user.email}</span>
+              <div className="p-url font-bold text-[18px] text-gray-700">
+                Email : <span className="p-url text-gray-600">{user.email}</span>
               </div>
-              <div className="font-bold text-[18px] mt-2 text-gray-700">
+              <div className="p-url font-bold text-[18px] mt-2 text-gray-700">
                 Name:{" "}
-                <span className="text-gray-600">
+                <span className="p-url text-gray-600">
                   {user.displayName || "User"}
                 </span>
               </div>
@@ -197,7 +197,7 @@ const Profile = () => {
                   <label className="w-1/3 text-lg font-semibold">Name:</label>
                   <input
                     type="text"
-                    className="w-2/3 p-2 border rounded"
+                    className="p-url w-2/3 p-2 border rounded"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -205,12 +205,12 @@ const Profile = () => {
                   />
                 </div>
                 <div className="flex gap-4 items-center">
-                  <label className="w-1/3 text-lg font-semibold">
+                  <label className=" w-1/3 text-lg font-semibold">
                     Photo URL:
                   </label>
                   <input
                     type="url"
-                    className="w-2/3 p-2 border rounded"
+                    className="p-url w-2/3 p-2 border rounded"
                     value={photo}
                     onChange={(e) => setPhoto(e.target.value)}
                     required
