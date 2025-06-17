@@ -6,7 +6,7 @@ import axios from "axios";
 import { getAuth } from "firebase/auth";
 
 const PostArticle = () => {
-  document.title = "AddTask";
+  document.title = "Post Articles";
   const { user } = useContext(AuthContext);
 
   const notify = () => toast.success("Article added successfully!");

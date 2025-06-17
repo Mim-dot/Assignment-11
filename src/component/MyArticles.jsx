@@ -6,6 +6,7 @@ import { useAuth } from "../Provider/AuthProvider";
 import axios from "axios";
 
 const MyArticles = () => {
+    document.title = "My Articles";
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const [articles, setArticles] = useState([]);

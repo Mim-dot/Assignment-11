@@ -9,6 +9,7 @@ import axios from "axios";
 import { useTypewriter } from "react-simple-typewriter";
 import { useAuth } from "../Provider/AuthProvider";
 const AllArticles = () => {
+    document.title = "All Articles";
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   // const data = useLoaderData();

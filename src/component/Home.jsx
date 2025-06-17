@@ -8,6 +8,7 @@ import ExtraSections2 from './ExtraSections2';
 import ShowCategory from './ShowCategory';
 
 const Home = () => {
+    document.title = "Home";
   return (
     <div>
       <Banner/>

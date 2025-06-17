@@ -10,6 +10,7 @@ import axios from "axios";
 import { getAuth } from "firebase/auth";
 
 const Update = () => {
+    document.title = "Update";
   const [data, setData] = useState({});
   const { id } = useParams();
   const { user } = useContext(AuthContext);

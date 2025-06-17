@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
 const ShowCategory = () => {
+    document.title = "Ctegories";
   const [loading, setLoading] = useState(true);
   const { category } = useParams();
   const [sortOrder, setSortOrder] = useState("");

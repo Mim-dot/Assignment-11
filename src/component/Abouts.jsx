@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FaUsers, FaTools, FaLightbulb } from "react-icons/fa";
 
 const Abouts = () => {
+    document.title = "About";
   return (
     <section className="max-w-6xl mx-auto px-4 py-16 mt-6">
       <motion.div
