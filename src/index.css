@@ -259,3 +259,18 @@ color: #f36e39;
 .dark .p-url{
  color: #ffffff;
 }
+.dark .weekly-challenge {
+  background: linear-gradient(to bottom right, #111827, #1f2937, #111827);
+}
+.dark .weekly-challenge-p {
+  color: #dbeafe;
+}
+.dark .Contact{
+  color: #dbeafe;
+}
+.dark .Contactus {
+ background-color: #2a2a3a;
+}
+.dark .Contact-f {
+  color: #86460a;
+}

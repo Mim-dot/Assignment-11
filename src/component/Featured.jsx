@@ -30,6 +30,9 @@ const Featured = () => {
 
   return (
     <div className="p-6">
+     <h1 className=" text-3xl font-bold my-6 text-center text-indigo-800 dark:text-white">
+        Most Recent Posts
+      </h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
         {tasks.map((task, index) => (
           <motion.div

@@ -40,12 +40,12 @@ const visibleCount = 4;
 const ExtraSections = () => {
   const [startIndex, setStartIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStartIndex((prev) => (prev + 1) % contributors.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setStartIndex((prev) => (prev + 1) % contributors.length);
+  //   }, 4000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const visibleContributors = useMemo(() => {
     return Array.from({ length: visibleCount }, (_, i) => {

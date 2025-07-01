@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
-import { NavLink } from 'react-router';
-import { AuthContext } from '../Provider/AuthProvider';
-import { toast } from 'react-toastify';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import "../index.css"
-import Swal from 'sweetalert2';
+import React, { useContext } from "react";
+import { NavLink } from "react-router";
+import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import { useEffect } from "react";
+import "../index.css";
+import Swal from "sweetalert2";
 const Nav = () => {
- 
   const [isDark, setIsDark] = useState(
     () => localStorage.getItem("theme") === "dark"
   );
@@ -23,41 +22,41 @@ const Nav = () => {
       localStorage.setItem("theme", "light");
     }
   }, [isDark]);
-      
+
   const { user, logOut } = useContext(AuthContext);
-  
+
   //console.log(user);
   const handleLogOut = () => {
     Swal.fire({
-    title: "Are you sure?",
-    text: "You will be logged out!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Yes, logout!",
-    confirmButtonColor: "#2563EB",
-    cancelButtonColor: "#6B7280",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      logOut()
-        .then(() => {
-          Swal.fire({
-            title: "Logged out!",
-            text: "You have been logged out successfully.",
-            icon: "success",
-            confirmButtonColor: "#2563EB",
-            timer: 1500,
+      title: "Are you sure?",
+      text: "You will be logged out!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, logout!",
+      confirmButtonColor: "#2563EB",
+      cancelButtonColor: "#6B7280",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            Swal.fire({
+              title: "Logged out!",
+              text: "You have been logged out successfully.",
+              icon: "success",
+              confirmButtonColor: "#2563EB",
+              timer: 1500,
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Oops!",
+              text: error.message,
+              icon: "error",
+              confirmButtonColor: "#2563EB",
+            });
           });
-        })
-        .catch((error) => {
-          Swal.fire({
-            title: "Oops!",
-            text: error.message,
-            icon: "error",
-            confirmButtonColor: "#2563EB",
-          });
-        });
-    }
-  });
+      }
+    });
   };
 
   const navLinks = (
@@ -66,7 +65,7 @@ const Nav = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive ? 'text-primary font-semibold' : ''
+            isActive ? "text-primary font-semibold" : ""
           }
         >
           Home
@@ -76,7 +75,7 @@ const Nav = () => {
         <NavLink
           to="/all"
           className={({ isActive }) =>
-            isActive ? 'text-primary font-semibold' : ''
+            isActive ? "text-primary font-semibold" : ""
           }
         >
           All Articles
@@ -86,26 +85,38 @@ const Nav = () => {
         <NavLink
           to="/about"
           className={({ isActive }) =>
-            isActive ? 'text-primary font-semibold' : ''
+            isActive ? "text-primary font-semibold" : ""
           }
         >
           About Us
         </NavLink>
-      </li>
-         <button
-              onClick={() => setIsDark(!isDark)}
-              className="btn btn-sm"
-              aria-label="Toggle theme"
-            >
-              {isDark ? "☀" : "🌙"}
-            </button>
+      </li>{" "}
+      <li>
+         <NavLink
+        to="/contactUs"
+        className={({ isActive }) =>
+          isActive ? "text-primary font-semibold" : ""
+        }
+      >
+        Contact Us
+      </NavLink>
+      </li>{" "}
+      <button
+        onClick={() => setIsDark(!isDark)}
+        className="btn btn-sm"
+        aria-label="Toggle theme"
+      >
+        {isDark ? "☀" : "🌙"}
+      </button>
     </>
   );
 
   return (
     <div className="navbar nav-nav  bg-white text-[#1F2937] border-[#E5E7EB] border-b hover:bg-[#f4f4f7] backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50">
       <div className="flex-1">
-        <a className="btn btn-ghost italic text-2xl text-[#77c97d] font-bold">Lilo</a>
+        <a className="btn btn-ghost italic text-2xl text-[#77c97d] font-bold">
+          Lilo
+        </a>
       </div>
 
       {/* Mobile Menu */}
@@ -118,7 +129,12 @@ const Nav = () => {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
           </svg>
         </div>
         <ul
@@ -128,21 +144,27 @@ const Nav = () => {
           {navLinks}
           {user && (
             <>
-              <li><NavLink to={`/myarticles/${user.email}`}>My Articles</NavLink></li>
-              <li><NavLink to="/post">Post Article</NavLink></li>
-              <li><NavLink to="/profile">Profile</NavLink></li>
-              <li><button onClick={handleLogOut}>Log out</button></li>
+              {/* <li>
+                <NavLink to={`/myarticles/${user.email}`}>My Articles</NavLink>
+              </li>
+              <li>
+                <NavLink to="/post">Post Article</NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile">Profile</NavLink>
+              </li>
+              <li>
+                <button onClick={handleLogOut}>Log out</button>
+              </li> */}
             </>
           )}
         </ul>
       </div>
 
-     
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-2">{navLinks}</ul>
       </div>
 
-     
       <div className="flex-none drop-nav">
         {user ? (
           <div className="dropdown dropdown-end">
@@ -165,13 +187,19 @@ const Nav = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52"
             >
-                <li><NavLink to={`/myarticles/${user.email}`}>My Articles</NavLink></li>
-                {/* to={`/myarticles/${user?.uid}`} */}
-              <li><NavLink to="/post">Post Article</NavLink></li>
-              <li><NavLink to="/profile">Profile</NavLink></li>
-               <li><button onClick={handleLogOut}>Log out</button></li> 
-                
-        
+              <li>
+                <NavLink to={`/myarticles/${user.email}`}>My Articles</NavLink>
+              </li>
+              {/* to={`/myarticles/${user?.uid}`} */}
+              <li>
+                <NavLink to="/post">Post Article</NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile">Profile</NavLink>
+              </li>
+              <li>
+                <button onClick={handleLogOut}>Log out</button>
+              </li>
             </ul>
           </div>
         ) : (

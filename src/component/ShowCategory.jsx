@@ -42,8 +42,13 @@ const ShowCategory = () => {
     );
   }
   return (
-    <div className="my-20 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div className="">
+      <h1 className="text-3xl text-center my-3 font-bold mb- text-indigo-800 dark:text-white">
+       Choose Your Topic
+      </h1>
+         <div className="my-10 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
       {["Science", "Arts", "Technology"].map((category, index) => (
+        
         <motion.div
           key={category}
           onClick={() => {
@@ -86,6 +91,7 @@ const ShowCategory = () => {
           <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-indigo-500 transition-all duration-300 pointer-events-none" />
         </motion.div>
       ))}
+    </div>
     </div>
   );
 };

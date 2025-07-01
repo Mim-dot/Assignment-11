@@ -16,6 +16,7 @@ import Update from "../component/Update";
 import CategoriesList from "../component/CategoriesList";
 import MyArticles from "../component/MyArticles";
 import { getAuth } from "firebase/auth";
+import ContactUs from "../component/ContactUs";
 // import myArticlesLoader from "../component/myArticlesLoader";
 export const router = createBrowserRouter([
   {
@@ -103,6 +104,10 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <Abouts />,
+      },
+      {
+        path: "/contactUs",
+        element: <ContactUs />,
       },
       {
         path: "/auth/login",

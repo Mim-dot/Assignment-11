@@ -39,7 +39,9 @@ const CategoryArticles = () => {
     );
   }
   return (
+    
     <div className="list min-h-[70vh] category bg-gray-50 flex justify-center items-center py-20 px-6">
+     
       <div className="mt-18 max-w-6xl w-full grid grid-cols-1 sm:grid-cols-3 gap-10">
         {data.slice(0, 3).map((article, index) => (
           <motion.div
