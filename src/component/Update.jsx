@@ -92,7 +92,7 @@ const Update = () => {
   return (
     <div className="update min-h-screen py-8 px-4 sm:px-6">
       <motion.div
-        className="motion-div mt-11 max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
+        className="motion-div mt-11 max-w-6xl mx-auto bg-white  rounded-xl shadow-lg overflow-hidden"
         variants={formVariants}
         initial="hidden"
         animate="visible"
@@ -129,13 +129,13 @@ const Update = () => {
                   required
                   placeholder="Article Title"
                   defaultValue={data?.title || ""}
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300  focus:ring-2 focus:ring-purple-500 focus:border-transparent  transition-all duration-200"
                 />
               </div>
 
               {/* Category */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700  mb-2">
                   Category
                 </label>
                 <input
@@ -145,7 +145,7 @@ const Update = () => {
                   placeholder="Select a Category"
                   required
                   defaultValue={data?.category || ""}
-                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
+                  className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent  transition-all duration-200"
                 />
                 <datalist id="categoryList">
                   <option value="Technology" />
@@ -171,7 +171,7 @@ const Update = () => {
 
               {/* Tags */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700  mb-2">
                   Tags (comma separated)
                 </label>
                 <input

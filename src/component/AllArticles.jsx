@@ -39,7 +39,7 @@ const AllArticles = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600 flex justify-center items-center gap-1">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin  flex justify-center items-center gap-1">
           <span className="loading loading-ring loading-xs"></span>
           <span className="loading loading-ring loading-sm"></span>
           <span className="loading loading-ring loading-md"></span>

@@ -61,7 +61,7 @@ const Register = () => {
 
   return (
     <motion.div
-      className="reg relative min-h-screen overflow-hidden bg-white dark:bg-black"
+      className="reg relative min-h-screen overflow-hidden bg-white "
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -70,7 +70,7 @@ const Register = () => {
       <div className="absolute inset-0">
         <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600 opacity-30 rounded-full blur-3xl animate-spin-slow" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-yellow-400 via-orange-500 to-red-500 opacity-20 rounded-full blur-2xl animate-pulse" />
-        <div className=" absolute inset-0 bg-gradient-to-br from-white/70 via-transparent to-white/70 dark:from-black/70 dark:to-black/70" />
+        <div className=" absolute inset-0 bg-gradient-to-br from-white/70 via-transparent to-white/70 " />
       </div>
 
       {/* Main Form Section */}
@@ -79,10 +79,10 @@ const Register = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-          className="sm:my-6 text-center md:text-left text-black dark:text-white"
+          className="sm:my-6 text-center md:text-left text-black "
         >
           <h1 className=" text-4xl font-bold mb-3">Join Lilo</h1>
-          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-sm mx-auto md:mx-0">
+          <p className="text-lg text-gray-700  max-w-sm mx-auto md:mx-0">
             Create your account to connect with Knowledge Sharing Platform.
           </p>
         </motion.div>
@@ -91,7 +91,7 @@ const Register = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="w-full mt-8 max-w-md mx-auto backdrop-blur-md  bg-white/10 border border-white/30 rounded-xl p-8 text-black dark:text-white"
+          className="w-full mt-8 max-w-md mx-auto backdrop-blur-md  bg-white/10 border border-white/30 rounded-xl p-8 text-black "
         >
           <form onSubmit={handleRegister} className="space-y-5">
             <motion.h2
@@ -138,13 +138,13 @@ const Register = () => {
               whileTap={{ scale: 0.95 }}
             >
               <FcGoogle size={20} />
-              <button type="button" onClick={handleGoogleLogin} className="text-sm cursor-pointer dark:text-white">
+              <button type="button" onClick={handleGoogleLogin} className="text-sm cursor-pointer ">
                 Register with Google
               </button>
             </motion.div>
 
             <motion.p
-              className="motion-p text-center text-sm mt-3 text-gray-700 dark:text-gray-300"
+              className="motion-p text-center text-sm mt-3 text-gray-700 "
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9 }}

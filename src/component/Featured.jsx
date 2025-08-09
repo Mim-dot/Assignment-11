@@ -22,7 +22,7 @@ const Featured = () => {
 
   if (loading) {
     return (
-      <div className="text-center p-6 dark:text-white">
+      <div className="text-center p-6 ">
         Loading featured tasks...
       </div>
     );
@@ -30,7 +30,7 @@ const Featured = () => {
 
   return (
     <div className="p-6">
-     <h1 className=" text-3xl font-bold my-6 text-center text-indigo-800 dark:text-white">
+     <h1 className=" text-3xl font-bold my-6 text-center text-indigo-800 ">
         Most Recent Posts
       </h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -41,7 +41,7 @@ const Featured = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
             whileHover={{ scale: 1.04, rotate: -0.5 }}
-            className="relative group bg-white feature  border border-purple-300 dark:border-indigo-800 p-6 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300"
+            className="relative group bg-white feature  border border-purple-300  p-6 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300"
           >
             {/* Glowing animated border layer */}
             <motion.div
@@ -58,15 +58,15 @@ const Featured = () => {
               </div>
 
               {/* Title */}
-              <h3 className=" text-2xl font-extrabold text-indigo-800 dark:text-white mb-2">
+              <h3 className=" text-2xl font-extrabold text-indigo-800  mb-2">
                 {task.title}
               </h3>
 
               {/* Category */}
-              <p className="feature-p text-xs uppercase font-semibold text-purple-600 dark:text-purple-300 mb-1 tracking-wide">
+              <p className="feature-p text-xs uppercase font-semibold text-purple-600  mb-1 tracking-wide">
                 Author Name
               </p>
-              <p className="feature-pp text-md text-gray-800 dark:text-gray-200 mb-4 font-medium">
+              <p className="feature-pp text-md text-gray-800  mb-4 font-medium">
                 {task.username}
               </p>
 
@@ -74,11 +74,11 @@ const Featured = () => {
               <p className="feature-p text-xs uppercase font-bold text-purple-600  mb-1 tracking-wide">
                 Describe
               </p>
-              <p className="feature-pp text-sm text-gray-800 dark:text-gray-200 mb-4">
+              <p className="feature-pp text-sm text-gray-800  mb-4">
                 {task.content}
               </p>
 
-              <p className="feature-p text-sm font-semibold text-indigo-600 dark:text-indigo-300">
+              <p className="feature-p text-sm font-semibold text-indigo-600 ">
                 Deadline:{" "}
                 <time dateTime={task.deadline} className="italic">
                   {new Date(task.deadline).toLocaleDateString(undefined, {

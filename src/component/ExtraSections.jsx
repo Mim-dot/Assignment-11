@@ -55,7 +55,7 @@ const ExtraSections = () => {
 
   return (
     <div className="extra w-full max-w-7xl mx-auto px-4 py-24 relative overflow-hidden mb-5 rounded-3xl shadow-inner">
-      <h2 className="extra-h2 text-4xl font-extrabold text-center text-zinc-900 dark:text-white mb-16">
+      <h2 className="extra-h2 text-4xl font-extrabold text-center text-zinc-900  mb-16">
         🌟 Top Contributors
       </h2>
 

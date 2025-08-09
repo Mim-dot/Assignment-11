@@ -65,8 +65,8 @@ const ExtraSections2 = () => {
               transition={{ duration: 0.8, type: "spring" }}
               className={`absolute w-64 text-center p-4 rounded-xl border ${
                 isActive
-                  ? "bg-white dark:bg-zinc-800 shadow-lg border-blue-400"
-                  : "bg-zinc-100 dark:bg-zinc-700 border-transparent"
+                  ? "bg-white  shadow-lg border-blue-400"
+                  : "bg-zinc-100  border-transparent"
               }`}
             >
               <img
@@ -74,10 +74,10 @@ const ExtraSections2 = () => {
                 alt={voice.name}
                 className="w-16 h-16 mx-auto mb-3 rounded-full border-2 border-blue-500"
               />
-              <h3 className="text-md font-semibold text-zinc-800 dark:text-white">
+              <h3 className="text-md font-semibold text-zinc-800 ">
                 {voice.name}
               </h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-300 mt-2 italic">
+              <p className="text-sm text-zinc-600  mt-2 italic">
                 “{voice.quote}”
               </p>
             </motion.div>

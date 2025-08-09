@@ -45,15 +45,15 @@ const PostArticle = () => {
   return (
     <div className="min-h-screen main-post bg-white  py-10 px-4 mt-10">
       <div className="max-w-4xl main-2 mx-auto bg-white  shadow-xl rounded-xl p-8 border border-orange-200 ">
-        <h2 className="text-3xl font-bold mb-8 text-center text-orange-600 dark:text-orange-400">
+        <h2 className="text-3xl font-bold mb-8 text-center text-orange-600 ">
           Post Article
         </h2>
 
         <form onSubmit={handleAddTask}>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left text-gray-700 dark:text-gray-300">
+            <table className="w-full text-sm text-left text-gray-700 ">
               <tbody>
-                <tr className="border-b dark:border-gray-600">
+                <tr className="border-b ">
                   <th scope="row" className="py-3 pr-4 font-semibold">
                     Title
                   </th>
@@ -68,7 +68,7 @@ const PostArticle = () => {
                   </td>
                 </tr>
 
-                <tr className="border-b dark:border-gray-600">
+                <tr className="border-b ">
                   <th scope="row" className="py-3 pr-4 font-semibold">
                     Category
                   </th>
@@ -89,7 +89,7 @@ const PostArticle = () => {
                   </td>
                 </tr>
 
-                <tr className="border-b dark:border-gray-600">
+                <tr className="border-b ">
                   <th scope="row" className="py-3 pr-4 font-semibold">
                     Content
                   </th>
@@ -104,7 +104,7 @@ const PostArticle = () => {
                   </td>
                 </tr>
 
-                <tr className="border-b dark:border-gray-600">
+                <tr className="border-b">
                   <th scope="row" className="py-3 pr-4 font-semibold">
                     Tags
                   </th>
@@ -133,7 +133,7 @@ const PostArticle = () => {
                   </td>
                 </tr>
 
-                <tr className="border-b dark:border-gray-600">
+                <tr className="border-b ">
                   <th scope="row" className="py-3 pr-4 font-semibold">
                     Photo URL
                   </th>
@@ -148,7 +148,7 @@ const PostArticle = () => {
                   </td>
                 </tr>
 
-                <tr className="border-b dark:border-gray-600">
+                <tr className="border-b ">
                   <th scope="row" className="py-3 pr-4 font-semibold">
                     User Name
                   </th>
@@ -158,7 +158,7 @@ const PostArticle = () => {
                       type="text"
                       readOnly
                       value={user?.displayName || ""}
-                      className="table-input bg-gray-100 dark:bg-gray-800"
+                      className="table-input bg-gray-100"
                     />
                   </td>
                 </tr>
@@ -173,7 +173,7 @@ const PostArticle = () => {
                       type="email"
                       readOnly
                       value={user?.email || ""}
-                      className="table-input bg-gray-100 dark:bg-gray-800"
+                      className="table-input bg-gray-100 "
                     />
                   </td>
                 </tr>

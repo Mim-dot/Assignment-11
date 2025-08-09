@@ -31,7 +31,7 @@ const ShowCategory = () => {
    if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600 flex justify-center items-center gap-1">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin  flex justify-center items-center gap-1">
           <span className="loading loading-ring loading-xs"></span>
           <span className="loading loading-ring loading-sm"></span>
           <span className="loading loading-ring loading-md"></span>
@@ -43,7 +43,7 @@ const ShowCategory = () => {
   }
   return (
     <div className="">
-      <h1 className="text-3xl text-center my-3 font-bold mb- text-indigo-800 dark:text-white">
+      <h1 className="text-3xl text-center my-3 font-bold mb- text-indigo-800 ">
        Choose Your Topic
       </h1>
          <div className="my-10 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -63,7 +63,7 @@ const ShowCategory = () => {
           ${
             sortOrder === category
               ? "bg-gradient-to-br from-[#4f46e5] to-[#9333ea] text-white border-transparent"
-              : "bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-100 border-zinc-200 dark:border-zinc-700 hover:shadow-2xl"
+              : "bg-white  text-gray-900  border-zinc-200  hover:shadow-2xl"
           }`}
         >
           
