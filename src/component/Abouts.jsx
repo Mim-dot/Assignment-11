@@ -49,7 +49,7 @@ const Abouts = () => {
           className="bg-white  rounded-2xl shadow-lg text-center transition"
         >
           <FaTools className="text-4xl text-green-400 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold mb-2 text-gray-800 ">Innovation</h3>
+          <h3 className="text-xl font-semibold mb-2 text-gray-800 ">Innovations</h3>
           <p className="text-gray-600 ">
             From dark mode to real-time updates, we continuously improve with user feedback and fresh ideas.
           </p>
