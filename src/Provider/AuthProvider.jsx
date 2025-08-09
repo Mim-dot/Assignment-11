@@ -16,6 +16,7 @@ import {
 
 export const AuthContext = createContext(null);
 import { toast } from "react-toastify";
+import { Navigate } from "react-router";
 
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -50,7 +51,9 @@ const AuthProvider = ({ children }) => {
   const handleGoogle = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
+      
         toast.success("Google login successful!");
+        
       })
       .catch((error) => {
         toast.error("Google login failed: " + error.message);
