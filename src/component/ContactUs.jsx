@@ -51,7 +51,7 @@ const ContactUs = () => {
     <div>
       {/* Hero */}
       <div className="hero">
-        <div className="hero-content text-center py-20">
+        <div className="hero-content text-center pt-20">
           <div className="max-w-4xl">
             <h1 className="Contact text-5xl font-bold text-primary">Contact Us</h1>
             <p className="Contact py-6 text-xl text-primary">
