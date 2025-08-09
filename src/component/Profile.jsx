@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
   document.title = "Profile";
-  const { user, updateUser, setUser } = useContext(AuthContext);
+  const { user, updateUser } = useContext(AuthContext);
   const defaultImage = "https://via.placeholder.com/100";
 
   const [tab, setTab] = useState("articles");
@@ -15,6 +15,7 @@ const Profile = () => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Sync local form values with Firebase user
   useEffect(() => {
     setName(user?.displayName || "");
     setPhoto(user?.photoURL || "");
@@ -26,6 +27,7 @@ const Profile = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        // ✅ Get token from actual Firebase user object
         const token = await user.getIdToken();
 
         const articlesRes = await fetch(
@@ -64,7 +66,7 @@ const Profile = () => {
                 user_name: comment.user_name,
                 user_photo: comment.user_photo,
                 date: comment.date,
-                user_email: comment.user_email, // ✅ fixed this line
+                user_email: comment.user_email,
               });
             }
           });
@@ -85,7 +87,6 @@ const Profile = () => {
     e.preventDefault();
     try {
       await updateUser({ displayName: name, photoURL: photo });
-      setUser({ ...user, displayName: name, photoURL: photo });
       toast.success("Profile updated successfully!", {
         position: "top-right",
         autoClose: 3000,
@@ -100,7 +101,7 @@ const Profile = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin  flex justify-center items-center gap-1">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin flex justify-center items-center gap-1">
           <span className="loading loading-ring loading-xs"></span>
           <span className="loading loading-ring loading-sm"></span>
           <span className="loading loading-ring loading-md"></span>
@@ -136,6 +137,7 @@ const Profile = () => {
             </div>
           </div>
 
+          {/* Tabs */}
           <div className="flex justify-center mt-6 space-x-4">
             {["articles", "comments", "edit"].map((type) => (
               <button
@@ -150,6 +152,7 @@ const Profile = () => {
             ))}
           </div>
 
+          {/* Tab Content */}
           <div className="mt-6">
             {tab === "articles" ? (
               <div className="space-y-4">
@@ -167,7 +170,7 @@ const Profile = () => {
                     </div>
                   ))
                 ) : (
-                  <p>No articles posted yet.</p>
+                  <p className="yet">No articles posted yet.</p>
                 )}
               </div>
             ) : tab === "comments" ? (
@@ -185,7 +188,7 @@ const Profile = () => {
                     </div>
                   ))
                 ) : (
-                  <p>No comments made yet.</p>
+                  <p className="yet">No comments made yet.</p>
                 )}
               </div>
             ) : (
@@ -205,7 +208,7 @@ const Profile = () => {
                   />
                 </div>
                 <div className="flex gap-4 items-center">
-                  <label className=" w-1/3 text-lg font-semibold">
+                  <label className="w-1/3 text-lg font-semibold">
                     Photo URL:
                   </label>
                   <input
@@ -219,7 +222,7 @@ const Profile = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer"
                 >
                   Save Changes
                 </button>
