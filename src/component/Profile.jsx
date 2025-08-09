@@ -138,11 +138,11 @@ const Profile = () => {
           </div>
 
           {/* Tabs */}
-          <div className="flex justify-center mt-6 space-x-4">
+          <div className="flex justify-center mt-6 space-x-4 ">
             {["articles", "comments", "edit"].map((type) => (
               <button
                 key={type}
-                className={`px-4 py-2 rounded ${
+                className={`px-4 py-2 rounded cursor-pointer ${
                   tab === type ? "bg-blue-500 text-white" : "bg-gray-200"
                 }`}
                 onClick={() => setTab(type)}
